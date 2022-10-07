@@ -9,6 +9,7 @@
     that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
+    
     Example:
     
     ... ado.net/XML headers & schema ...
@@ -209,7 +210,7 @@
     <comment>Text of the graph button</comment>
   </data>
   <data name="CPUClockLabel" xml:space="preserve">
-    <value>Clock</value>
+    <value>Cloc</value>
     <comment>Short label for CPU clock metric</comment>
   </data>
   <data name="CPUCoreClock" xml:space="preserve">
@@ -229,7 +230,7 @@
     <comment>Short label for CPU core load metric</comment>
   </data>
   <data name="CPUFanLabel" xml:space="preserve">
-    <value>Fan</value>
+    <value>Fan </value>
     <comment>Short label for CPU fan metric</comment>
   </data>
   <data name="CPULoadLabel" xml:space="preserve">
@@ -241,7 +242,7 @@
     <comment>Short label for CPU temp metric</comment>
   </data>
   <data name="CPUVoltageLabel" xml:space="preserve">
-    <value>Voltage</value>
+    <value>Volt</value>
     <comment>Short label for CPU voltage metric</comment>
   </data>
   <data name="DriveFree" xml:space="preserve">
@@ -313,7 +314,7 @@
     <comment>Full name for GPU fan metric</comment>
   </data>
   <data name="GPUFanLabel" xml:space="preserve">
-    <value>Fan</value>
+    <value>Fan </value>
     <comment>Short label for GPU voltage metric</comment>
   </data>
   <data name="GPUTemp" xml:space="preserve">
@@ -329,7 +330,7 @@
     <comment>Full name for GPU voltage metric</comment>
   </data>
   <data name="GPUVoltageLabel" xml:space="preserve">
-    <value>Voltage</value>
+    <value>Volt</value>
     <comment>Short label for GPU voltage metric</comment>
   </data>
   <data name="GPUVRAMClock" xml:space="preserve">
@@ -353,7 +354,7 @@
     <comment>Full name for network in metric</comment>
   </data>
   <data name="NetworkInLabel" xml:space="preserve">
-    <value>In</value>
+    <value>In </value>
     <comment>Short label for network in metric</comment>
   </data>
   <data name="NetworkOut" xml:space="preserve">
@@ -369,7 +370,7 @@
     <comment>Full name for RAM clock metric</comment>
   </data>
   <data name="RAMClockLabel" xml:space="preserve">
-    <value>Clock</value>
+    <value>Cloc</value>
     <comment>Short label for RAM clock metric</comment>
   </data>
   <data name="RAMFree" xml:space="preserve">
@@ -401,7 +402,7 @@
     <comment>Full name for RAM voltage metric</comment>
   </data>
   <data name="RAMVoltageLabel" xml:space="preserve">
-    <value>Voltage</value>
+    <value>Volt</value>
     <comment>Short label for RAM voltage metric</comment>
   </data>
   <data name="ButtonApply" xml:space="preserve">
@@ -1001,7 +1002,7 @@
     <comment>Full name for the network IP address metric</comment>
   </data>
   <data name="NetworkIPLabel" xml:space="preserve">
-    <value>IP</value>
+    <value>IP </value>
     <comment>Short label for network IP address metric</comment>
   </data>
   <data name="SettingsInitiallyHidden" xml:space="preserve">
