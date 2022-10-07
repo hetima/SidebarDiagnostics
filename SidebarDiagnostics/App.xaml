@@ -198,6 +198,7 @@
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="FontSize" Value="{Binding Source={x:Static frame:Settings.Instance}, Path=FontSetting.FontSize, Mode=OneWay}" />
+                <Setter Property="FontFamily" Value="HackGen35" />
                 <Setter Property="TextWrapping" Value="WrapWithOverflow" />
             </Style>
 
