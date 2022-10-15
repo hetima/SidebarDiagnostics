@@ -822,6 +822,6 @@ namespace SidebarDiagnostics.Framework
         public static readonly DateSetting Disabled = new DateSetting("Disabled");
         public static readonly DateSetting Short = new DateSetting("M");
         public static readonly DateSetting Normal = new DateSetting("d");
-        public static readonly DateSetting Long = new DateSetting("D");
+        public static readonly DateSetting Long = new DateSetting("MM月dd日 (ddd)");
     }
 }
