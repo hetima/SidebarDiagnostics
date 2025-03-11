@@ -138,7 +138,7 @@
     <comment>Short label for CPU clock metric</comment>
   </data>
   <data name="CPUCoreClock" xml:space="preserve">
-    <value>Core Clock</value>
+    <value>Kerntakt</value>
     <comment>Full name for CPU core clock metric</comment>
   </data>
   <data name="CPUCoreClockLabel" xml:space="preserve">
@@ -146,7 +146,7 @@
     <comment>Short label for CPU core clock metric</comment>
   </data>
   <data name="CPUCoreLoad" xml:space="preserve">
-    <value>Core Load</value>
+    <value>Kernlast</value>
     <comment>Full name for CPU core load metric</comment>
   </data>
   <data name="CPUCoreLoadLabel" xml:space="preserve">
@@ -202,7 +202,7 @@
     <comment>Full name for drive load metric</comment>
   </data>
   <data name="DriveLoadBar" xml:space="preserve">
-    <value>Load Bar</value>
+    <value>Ladebalken</value>
     <comment>Full name for drive load bar metric</comment>
   </data>
   <data name="DriveLoadBarLabel" xml:space="preserve">
@@ -214,7 +214,7 @@
     <comment>Short label for drive load metric</comment>
   </data>
   <data name="DriveRead" xml:space="preserve">
-    <value>Read Rate</value>
+    <value>Leserate</value>
     <comment>Full name for drive read metric</comment>
   </data>
   <data name="DriveReadLabel" xml:space="preserve">
@@ -234,7 +234,7 @@
     <comment>Short label for drive used metric</comment>
   </data>
   <data name="DriveWrite" xml:space="preserve">
-    <value>Write Rate</value>
+    <value>Schreibrate</value>
     <comment>Full name for drive write metric</comment>
   </data>
   <data name="DriveWriteLabel" xml:space="preserve">
@@ -250,7 +250,7 @@
     <comment>GPU monitor title</comment>
   </data>
   <data name="GPUCoreClock" xml:space="preserve">
-    <value>Core Clock</value>
+    <value>Kerntakt</value>
     <comment>Full name for GPU core clock metric</comment>
   </data>
   <data name="GPUCoreClockLabel" xml:space="preserve">
@@ -258,7 +258,7 @@
     <comment>Short label for RAM core clock metric</comment>
   </data>
   <data name="GPUCoreLoad" xml:space="preserve">
-    <value>Core Load</value>
+    <value>Kernlast</value>
     <comment>Full name for GPU core load metric</comment>
   </data>
   <data name="GPUCoreLoadLabel" xml:space="preserve">
@@ -274,7 +274,7 @@
     <comment>Short label for GPU voltage metric</comment>
   </data>
   <data name="GPUTemp" xml:space="preserve">
-    <value>Temperature</value>
+    <value>Temperatur</value>
     <comment>Full name for GPU temp metric</comment>
   </data>
   <data name="GPUTempLabel" xml:space="preserve">
@@ -290,7 +290,7 @@
     <comment>Short label for GPU voltage metric</comment>
   </data>
   <data name="GPUVRAMClock" xml:space="preserve">
-    <value>VRAM Clock</value>
+    <value>VRAM-Takt</value>
     <comment>Full name for GPU VRAM clock metric</comment>
   </data>
   <data name="GPUVRAMClockLabel" xml:space="preserve">
@@ -298,7 +298,7 @@
     <comment>Short label for GPU VRAM clock metric</comment>
   </data>
   <data name="GPUVRAMLoad" xml:space="preserve">
-    <value>VRAM Load</value>
+    <value>VRAM-Takt</value>
     <comment>Full name for GPU VRAM load metric</comment>
   </data>
   <data name="GPUVRAMLoadLabel" xml:space="preserve">
@@ -306,11 +306,11 @@
     <comment>Short label for GPU VRAM load metric</comment>
   </data>
   <data name="Graph" xml:space="preserve">
-    <value>Graph</value>
+    <value>Grafik</value>
     <comment>Graph taskbar menu item</comment>
   </data>
   <data name="Hide" xml:space="preserve">
-    <value>Verstecken</value>
+    <value>Ausblenden</value>
     <comment>Hide taskbar menu item</comment>
   </data>
   <data name="Network" xml:space="preserve">
@@ -318,7 +318,7 @@
     <comment>Network monitor title</comment>
   </data>
   <data name="NetworkIn" xml:space="preserve">
-    <value>Bandwidth In</value>
+    <value>Bandbreite Ein</value>
     <comment>Full name for network in metric</comment>
   </data>
   <data name="NetworkInLabel" xml:space="preserve">
@@ -326,7 +326,7 @@
     <comment>Short label for network in metric</comment>
   </data>
   <data name="NetworkOut" xml:space="preserve">
-    <value>Bandwidth Out</value>
+    <value>Bandbreite Aus</value>
     <comment>Full name for network out metric</comment>
   </data>
   <data name="NetworkOutLabel" xml:space="preserve">
