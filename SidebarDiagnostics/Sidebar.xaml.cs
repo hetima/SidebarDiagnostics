@@ -60,6 +60,7 @@ namespace SidebarDiagnostics
             Ready = false;
 
             await BindPosition();
+            await BindModel();
 
             Ready = true;
         }

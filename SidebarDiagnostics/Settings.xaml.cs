@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using SidebarDiagnostics.Models;
 using SidebarDiagnostics.Windows;
 using SidebarDiagnostics.Style;
+using Xceed.Wpf.Toolkit;
 
 namespace SidebarDiagnostics
 {

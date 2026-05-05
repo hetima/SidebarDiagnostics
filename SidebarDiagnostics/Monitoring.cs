@@ -15,6 +15,7 @@ using System.Windows.Media;
 using LibreHardwareMonitor.Hardware;
 using Newtonsoft.Json;
 using SidebarDiagnostics.Framework;
+using System.Threading.Tasks;
 
 namespace SidebarDiagnostics.Monitoring
 {
@@ -37,8 +38,20 @@ namespace SidebarDiagnostics.Monitoring
 
             UpdateBoard();
 
-            MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Select(c => NewPanel(c)).ToArray();
-        }
+ 
+           foreach (var c in config)
+    {
+        if (c.Type == MonitorType.RAM && c.Hardware != null)
+        {
+            c.Hardware = c.Hardware
+                .GroupBy(h => h.ID)
+                .Select(g => g.First())
+                .ToArray();
+    }
+}
+
+MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Select(c => NewPanel(c)).ToArray();
+}
 
         public void Dispose()
         {
@@ -1247,7 +1260,7 @@ namespace SidebarDiagnostics.Monitoring
 
             if (metrics.IsEnabled(MetricKey.NetworkExtIP))
             {
-                _extIP = GetExternalIPAddress();
+                _extIP = GetExternalIPAddressAsync().GetAwaiter().GetResult();
             }
 
             return (
@@ -1307,32 +1320,33 @@ namespace SidebarDiagnostics.Monitoring
             return null;
         }
 
-        private static string GetExternalIPAddress()
+        private static readonly HttpClient Http = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(5)
+        };
+
+        private static async Task<string> GetExternalIPAddressAsync()
         {
             try
             {
-                HttpWebRequest _request = WebRequest.CreateHttp(Constants.URLs.IPIFY);
-                _request.Method = HttpMethod.Get.Method;
-                _request.Timeout = 5000;
+                using var req = new HttpRequestMessage(HttpMethod.Get, Constants.URLs.IPIFY);
+                var res = await Http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
+                                    .ConfigureAwait(false);
+                res.EnsureSuccessStatusCode();
 
-                using (HttpWebResponse _response = (HttpWebResponse)_request.GetResponse())
-                {
-                    using (Stream _stream = _response.GetResponseStream())
-                    {
-                        using (StreamReader _reader = new StreamReader(_stream))
-                        {
-                            return _reader.ReadToEnd();
-                        }
-                    }
-                }
+                var ip = await res.Content.ReadAsStringAsync().ConfigureAwait(false);
+                return ip.Trim();
             }
-            catch (WebException)
+            catch (HttpRequestException)
+            {
+                return "";
+            }
+            catch (TaskCanceledException) // timeout or cancellation
             {
                 return "";
             }
         }
     }
-
     public interface iMetric : INotifyPropertyChanged, IDisposable
     {
         MetricKey Key { get; }

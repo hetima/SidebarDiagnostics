@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:oxycontrols="http://oxyplot.org/wpf/contrib"
         xmlns:local="clr-namespace:SidebarDiagnostics"
         xmlns:win="clr-namespace:SidebarDiagnostics.Windows"
         xmlns:sty="clr-namespace:SidebarDiagnostics.Style"
@@ -51,11 +52,11 @@
             </Grid>
         </Expander>
         
-        <oxy:Plot x:Name="OPGraph" Margin="20,10,40,10">
-            <oxy:Plot.Axes>
-                <oxy:LogarithmicAxis Position="Left" MajorGridlineStyle="Solid" />
-                <oxy:DateTimeAxis Position="Bottom" StringFormat="T" Angle="45" />
-            </oxy:Plot.Axes>
-        </oxy:Plot>
+        <oxycontrols:Plot x:Name="OPGraph" Margin="20,10,40,10">
+            <oxycontrols:Plot.Axes>
+                <oxycontrols:LogarithmicAxis Position="Left" MajorGridlineStyle="Solid" />
+                <oxycontrols:DateTimeAxis Position="Bottom" StringFormat="T" Angle="45" />
+            </oxycontrols:Plot.Axes>
+        </oxycontrols:Plot>
     </DockPanel>
 </sty:FlatWindow>

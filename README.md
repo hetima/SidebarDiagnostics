@@ -4,7 +4,7 @@ A simple sidebar for Windows desktop that displays hardware diagnostic informati
 
 ### Download
 
-Go to the <a href="https://github.com/ArcadeRenegade/SidebarDiagnostics/releases">releases tab</a>.
+Go to the <a href="https://github.com/thewriteway/SidebarDiagnostics/releases">releases tab</a>.
 
 ### Features
 * Monitors CPU, RAM, GPU, network, and logical drives.
@@ -28,10 +28,7 @@ https://www.paypal.me/arcaderenegade
 
 ### Supported OS
 
-* Windows 10
-* Windows 8.1
-* Windows 8
-* Windows 7
+* Windows 10/11
 
 ### License
 
@@ -43,7 +40,7 @@ Please provide a link to this GitHub repository if reuploading. Thank you.
 
 Written in C# .NET WPF.
 
-Currently compiled in <a href="https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-web-installer">.NET 4.7.2</a>.
+Currently compiled in <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.19-windows-x64-installer">.NET 8</a>.
 
 You will need to run it as administrator.
 

@@ -3,6 +3,8 @@ using SidebarDiagnostics.Models;
 using SidebarDiagnostics.Windows;
 using System.ComponentModel;
 using SidebarDiagnostics.Style;
+using Xceed.Wpf.Toolkit;
+using OxyPlot.Wpf;
 
 namespace SidebarDiagnostics
 {

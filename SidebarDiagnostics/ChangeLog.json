@@ -1,4 +1,26 @@
 ﻿[
+
+	{
+		"Version": "3.7.4",
+		"Changes": [
+			"LibreHardwareMonitor Updates"
+		]
+	},
+
+	{
+		"Version": "3.7.3",
+		"Changes": [
+			"LibreHardwareMonitor Updates"
+		]
+	},
+
+	{
+		"Version": "3.7.2",
+		"Changes": [
+			"Net V8 updates",
+			"Now uses PawnIO libraries instead of insecure Winring0"
+		]
+	},
 	{
 		"Version": "3.6.3",
 		"Changes": [

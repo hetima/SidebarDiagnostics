@@ -303,9 +303,8 @@
                         <Setter Property="ColorMode" Value="ColorCanvas" />
                         <Setter Property="DisplayColorAndName" Value="True" />
                         <Setter Property="ShowStandardColors" Value="False" />
-                        <Setter Property="AdvancedButtonHeader" Value="Advanced" />
                         <Setter Property="AvailableColorsHeader" Value="Colors" />
-                        <Setter Property="StandardButtonHeader" Value="Standard" />
+                        <Setter Property="StandardTabHeader" Value="Standard" />
                     </Style>
                 </Style.Resources>
             </Style>
