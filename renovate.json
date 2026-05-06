@@ -17,5 +17,5 @@
       "packagePatterns": ["*"]
     }
   ],
-  "repositories": ["thewriteway/SidebarDiagnostics"]
+  "repositories": ["hetima/SidebarDiagnostics"]
 }

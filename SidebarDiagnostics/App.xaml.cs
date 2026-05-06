@@ -14,7 +14,6 @@ using SidebarDiagnostics.Utilities;
 using SidebarDiagnostics.Windows;
 using Xceed.Wpf.Toolkit;
 using System.Net.Http;
-using Velopack;
 
 namespace SidebarDiagnostics
 {
@@ -36,13 +35,6 @@ namespace SidebarDiagnostics
             Culture.SetDefault();
             Culture.SetCurrent(true);
 
-            // UPDATE
-            #if !DEBUG
-            if (Framework.Settings.Instance.AutoUpdate)
-            {
-                await AppUpdate(false);
-            }
-            #endif
 
             // SETTINGS
             CheckSettings();
@@ -103,7 +95,7 @@ namespace SidebarDiagnostics
 
             if (_result == MessageBoxResult.OK)
             {
-                Process.Start(ConfigurationManager.AppSettings["WikiURL"]);
+                Process.Start(new ProcessStartInfo(ConfigurationManager.AppSettings["WikiURL"]) { UseShellExecute = true });
             }
         }
 
@@ -138,85 +130,6 @@ namespace SidebarDiagnostics
             }
 
             new Graph(_sidebar);
-        }
-
-        private async Task AppUpdate(bool showInfo)
-        {
-            // Will exit and restart app internally if an update is applied.
-            await VelopackUpdateAsync(showInfo);
-        }
-
-
-        private async Task<bool> VelopackUpdateAsync(bool showInfo)
-        {
-            try
-            {
-                var manager = new UpdateManager(ConfigurationManager.AppSettings["CurrentReleaseURL"]);
-
-                // null => no updates available
-                var info = await manager.CheckForUpdatesAsync();
-                if (info != null)
-                {
-                    // Optional: show the version you’re going to install
-                    // var newVersion = info.TargetFullRelease?.Version?.ToString();
-
-                    // Show your progress UI and download
-                    var updateWindow = new Update();
-                    updateWindow.Show();
-                    await manager.DownloadUpdatesAsync(info, p => updateWindow.SetProgress(p));
-                    updateWindow.Close();
-
-                    // This exits the current process, applies the update, and restarts the app.
-                    manager.ApplyUpdatesAndRestart(info);
-
-                    // In practice the line above restarts the app; return value is mostly academic.
-                    return true;
-                }
-                else if (showInfo)
-                {
-                    System.Windows.MessageBox.Show(
-                        Framework.Resources.UpdateSuccessText,
-                        Framework.Resources.AppName,
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information,
-                        MessageBoxResult.OK,
-                        MessageBoxOptions.DefaultDesktopOnly);
-                }
-            }
-            catch (HttpRequestException)
-            {
-                if (showInfo)
-                {
-                    System.Windows.MessageBox.Show(
-                        Framework.Resources.UpdateErrorText,
-                        Framework.Resources.UpdateErrorTitle,
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error,
-                        MessageBoxResult.OK,
-                        MessageBoxOptions.DefaultDesktopOnly);
-                }
-            }
-            catch (Exception e)
-            {
-                Framework.Settings.Instance.AutoUpdate = false;
-                Framework.Settings.Instance.Save();
-
-                using (var log = new EventLog("Application"))
-                {
-                    log.Source = Framework.Resources.AppName;
-                    log.WriteEntry(e.ToString(), EventLogEntryType.Error, 100, 1);
-                }
-
-                System.Windows.MessageBox.Show(
-                    Framework.Resources.UpdateErrorFatalText,
-                    Framework.Resources.UpdateErrorTitle,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error,
-                    MessageBoxResult.OK,
-                    MessageBoxOptions.DefaultDesktopOnly);
-            }
-
-            return false;
         }
 
 
@@ -299,20 +212,11 @@ namespace SidebarDiagnostics
             _sidebar.AppBarHide();
         }
 
-        private void Donate_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start(ConfigurationManager.AppSettings["DonateURL"]);
-        }
-
         private void GitHub_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(ConfigurationManager.AppSettings["RepoURL"]);
+            Process.Start(new ProcessStartInfo(ConfigurationManager.AppSettings["RepoURL"]) { UseShellExecute = true });
         }
 
-        private async void Update_Click(object sender, RoutedEventArgs e)
-        {
-            await AppUpdate(true);
-        }
 
         private void Close_Click(object sender, EventArgs e)
         {
