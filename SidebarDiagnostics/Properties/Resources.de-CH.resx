@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -145,11 +145,7 @@
     <value>GitHub</value>
     <comment>Text of the GitHub button</comment>
   </data>
-  <data name="ButtonGraph" xml:space="preserve">
-    <value>Grafik</value>
-    <comment>Text of the graph button</comment>
-  </data>
-  <data name="ButtonHide" xml:space="preserve">
+<data name="ButtonHide" xml:space="preserve">
     <value>Verbergen</value>
     <comment>Text of the hide button</comment>
   </data>
@@ -373,43 +369,7 @@
     <value>VRAM</value>
     <comment>Short label for GPU VRAM load metric</comment>
   </data>
-  <data name="GraphConfigSectionTitle" xml:space="preserve">
-    <value>Konfiguration</value>
-    <comment>Title of the config section in the graph window</comment>
-  </data>
-  <data name="GraphDuration" xml:space="preserve">
-    <value>Laufzeit</value>
-    <comment>Graph config duration label</comment>
-  </data>
-  <data name="GraphDurationMinute" xml:space="preserve">
-    <value>Minute</value>
-    <comment>Graph duration minute</comment>
-  </data>
-  <data name="GraphDurationMinutes" xml:space="preserve">
-    <value>Minuten</value>
-    <comment>Graph duration minutes plural</comment>
-  </data>
-  <data name="GraphDurationSeconds" xml:space="preserve">
-    <value>Sekunden</value>
-    <comment>Graph duration seconds</comment>
-  </data>
-  <data name="GraphHardware" xml:space="preserve">
-    <value>Hardware</value>
-    <comment>Graph config hardware label</comment>
-  </data>
-  <data name="GraphMetrics" xml:space="preserve">
-    <value>Anzeigen</value>
-    <comment>Graph config metrics label</comment>
-  </data>
-  <data name="GraphMonitor" xml:space="preserve">
-    <value>Monitor</value>
-    <comment>Graph config monitor label</comment>
-  </data>
-  <data name="GraphTitle" xml:space="preserve">
-    <value>Grafik</value>
-    <comment>Title of the graph window</comment>
-  </data>
-  <data name="LanguageChangedText" xml:space="preserve">
+<data name="LanguageChangedText" xml:space="preserve">
     <value>Bitte starten Sie die Anwendung neu!</value>
     <comment>Text of the language changed popup</comment>
   </data>

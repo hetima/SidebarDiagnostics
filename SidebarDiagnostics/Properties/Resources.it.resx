@@ -145,11 +145,7 @@
     <value>GitHub</value>
     <comment>Text of the GitHub button</comment>
   </data>
-  <data name="ButtonGraph" xml:space="preserve">
-    <value>Grafico</value>
-    <comment>Text of the graph button</comment>
-  </data>
-  <data name="ButtonHide" xml:space="preserve">
+<data name="ButtonHide" xml:space="preserve">
     <value>Nascondi</value>
     <comment>Text of the hide button</comment>
   </data>
@@ -373,43 +369,7 @@
     <value>Uso VRAM</value>
     <comment>Short label for GPU VRAM load metric</comment>
   </data>
-  <data name="GraphConfigSectionTitle" xml:space="preserve">
-    <value>Configurazione</value>
-    <comment>Title of the config section in the graph window</comment>
-  </data>
-  <data name="GraphDuration" xml:space="preserve">
-    <value>Durata</value>
-    <comment>Graph config duration label</comment>
-  </data>
-  <data name="GraphDurationMinute" xml:space="preserve">
-    <value>Minuto</value>
-    <comment>Graph duration minute</comment>
-  </data>
-  <data name="GraphDurationMinutes" xml:space="preserve">
-    <value>Minuti</value>
-    <comment>Graph duration minutes plural</comment>
-  </data>
-  <data name="GraphDurationSeconds" xml:space="preserve">
-    <value>Secondi</value>
-    <comment>Graph duration seconds</comment>
-  </data>
-  <data name="GraphHardware" xml:space="preserve">
-    <value>Hardware</value>
-    <comment>Graph config hardware label</comment>
-  </data>
-  <data name="GraphMetrics" xml:space="preserve">
-    <value>Metrica</value>
-    <comment>Graph config metrics label</comment>
-  </data>
-  <data name="GraphMonitor" xml:space="preserve">
-    <value>Tenere sotto controllo</value>
-    <comment>Graph config monitor label</comment>
-  </data>
-  <data name="GraphTitle" xml:space="preserve">
-    <value>Grafico</value>
-    <comment>Title of the graph window</comment>
-  </data>
-  <data name="LanguageChangedText" xml:space="preserve">
+<data name="LanguageChangedText" xml:space="preserve">
     <value>Riavvia l'app.</value>
     <comment>Text of the language changed popup</comment>
   </data>

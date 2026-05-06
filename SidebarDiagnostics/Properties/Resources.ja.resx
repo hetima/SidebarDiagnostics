@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -305,11 +305,7 @@
     <value>Vメモリ</value>
     <comment>Short label for GPU VRAM load metric</comment>
   </data>
-  <data name="Graph" xml:space="preserve">
-    <value>Graph</value>
-    <comment>Graph taskbar menu item</comment>
-  </data>
-  <data name="Hide" xml:space="preserve">
+<data name="Hide" xml:space="preserve">
     <value>隠す</value>
     <comment>Hide taskbar menu item</comment>
   </data>

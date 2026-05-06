@@ -77,8 +77,6 @@ namespace SidebarDiagnostics
             Model.Reload();
 
             Ready = true;
-
-            BindGraphs();
         }
 
         public override async Task AppBarShow()
@@ -191,8 +189,6 @@ namespace SidebarDiagnostics
 
             Ready = true;
 
-            BindGraphs();
-
             if (_openSettings)
             {
                 _openSettings = false;
@@ -206,19 +202,6 @@ namespace SidebarDiagnostics
 
                 AppBarHide();
             }
-        }
-
-        private void BindGraphs()
-        {
-            foreach (Graph _graph in App.Current.Graphs)
-            {
-                _graph.Model.BindData(Model.MonitorManager);
-            }
-        }
-
-        private void GraphButton_Click(object sender, RoutedEventArgs e)
-        {
-            App.Current.OpenGraph();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)

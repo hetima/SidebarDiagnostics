@@ -120,19 +120,6 @@ namespace SidebarDiagnostics
             new Settings(_sidebar);
         }
 
-        public void OpenGraph()
-        {
-            Sidebar _sidebar = Sidebar;
-
-            if (_sidebar == null || !_sidebar.Ready)
-            {
-                return;
-            }
-
-            new Graph(_sidebar);
-        }
-
-
         private void CheckSettings()
         {
             if (Framework.Settings.Instance.RunAtStartup && !Utilities.Startup.StartupTaskExists())
@@ -166,11 +153,6 @@ namespace SidebarDiagnostics
             }
 
             _sidebar.Reload();
-        }
-
-        private void Graph_Click(object sender, EventArgs e)
-        {
-            OpenGraph();
         }
 
         private void Visibility_SubmenuOpened(object sender, EventArgs e)
@@ -235,14 +217,6 @@ namespace SidebarDiagnostics
             get
             {
                 return Windows.OfType<Sidebar>().FirstOrDefault();
-            }
-        }
-
-        public IEnumerable<Graph> Graphs
-        {
-            get
-            {
-                return Windows.OfType<Graph>();
             }
         }
 

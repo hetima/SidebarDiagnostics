@@ -22,7 +22,6 @@
                     <ContextMenu>
                         <MenuItem Header="{x:Static frame:Resources.ButtonSettings}" Click="Settings_Click" />
                         <MenuItem Header="{x:Static frame:Resources.ButtonReload}" Click="Reload_Click" />
-                        <MenuItem Header="{x:Static frame:Resources.ButtonGraph}" Click="Graph_Click" />
                         <Separator />
                         <MenuItem Header="{x:Static frame:Resources.ButtonVisibility}" SubmenuOpened="Visibility_SubmenuOpened">
                             <MenuItem Header="{x:Static frame:Resources.ButtonShow}" Click="Show_Click" />
@@ -550,30 +549,6 @@
             <Style x:Key="ChangeLogLine" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ChangeLogBullet}">
                 <Setter Property="Margin" Value="0,0,0,4" />
                 <Setter Property="TextWrapping" Value="Wrap" />
-            </Style>
-
-            <Style x:Key="ChartContent" TargetType="{x:Type DockPanel}">
-                <Setter Property="LastChildFill" Value="True" />
-                <Setter Property="Margin" Value="15,5,15,15" />
-            </Style>
-
-            <Style x:Key="ChartExpander" TargetType="{x:Type Expander}">
-                <Setter Property="Padding" Value="0,5" />
-            </Style>
-
-            <Style x:Key="ChartLabel" TargetType="{x:Type Label}">
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Margin" Value="0,2,15,2" />
-                <Setter Property="MinWidth" Value="60" />
-            </Style>
-
-            <Style x:Key="ChartComboBox" TargetType="{x:Type ComboBox}">
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-
-            <Style x:Key="ChartCheckComboBox" TargetType="{x:Type xctk:CheckComboBox}">
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Delimiter" Value=", " />
             </Style>
 
             <Style x:Key="ScrollBarTrackThumb" TargetType="{x:Type Thumb}">

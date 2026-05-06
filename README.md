@@ -8,7 +8,6 @@ Go to the <a href="https://github.com/thewriteway/SidebarDiagnostics/releases">r
 
 ### Features
 * Monitors CPU, RAM, GPU, network, and logical drives.
-* Create graphs for all metrics.
 * Allows for lots of customization.
 * Allows alerts for various values.
 * Allows binding hotkeys.
