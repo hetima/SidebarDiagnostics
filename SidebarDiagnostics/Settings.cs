@@ -816,7 +816,7 @@ namespace SidebarDiagnostics.Framework
                     return Resources.SettingsDateFormatDisabled;
                 }
 
-                return DateTime.Today.ToString(Format, Culture.CultureInfo);
+                return DateTime.Today.ToString(Format, Culture.Default);
             }
         }
 

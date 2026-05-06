@@ -127,11 +127,11 @@ namespace SidebarDiagnostics.Models
         {
             DateTime _now = DateTime.Now;
 
-            Time = _now.ToString(Framework.Settings.Instance.Clock24HR ? "H:mm:ss" : "h:mm:ss tt", Culture.CultureInfo);
+            Time = _now.ToString(Framework.Settings.Instance.Clock24HR ? "H:mm:ss" : "h:mm:ss tt", Culture.Default);
 
             if (ShowDate)
             {
-                Date = _now.ToString(Framework.Settings.Instance.DateSetting.Format, Culture.CultureInfo);
+                Date = _now.ToString(Framework.Settings.Instance.DateSetting.Format, Culture.Default);
             }
         }
 

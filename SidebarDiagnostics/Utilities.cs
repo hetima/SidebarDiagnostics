@@ -236,7 +236,7 @@ public static class Startup
 
         public static CultureItem[] GetAll()
         {
-            return new CultureItem[1] { new CultureItem() { Value = DEFAULT, Text = Resources.SettingsLanguageDefault } }.Concat(CultureInfo.GetCultures(CultureTypes.SpecificCultures).Where(c => Languages.Contains(c.TwoLetterISOLanguageName)).OrderBy(c => c.DisplayName).Select(c => new CultureItem() { Value = c.Name, Text = c.DisplayName })).ToArray();
+            return new CultureItem[1] { new CultureItem() { Value = DEFAULT, Text = Resources.SettingsLanguageDefault } }.Concat(Languages.Select(lang => new CultureInfo(lang)).OrderBy(c => c.DisplayName).Select(c => new CultureItem() { Value = c.Name, Text = c.DisplayName })).ToArray();
         }
 
         public static string[] Languages
@@ -254,9 +254,15 @@ public static class Startup
             get
             {
                 string culture = Framework.Settings.Instance.Culture;
-                return string.Equals(culture, DEFAULT, StringComparison.Ordinal)
-                    ? Default
-                    : new CultureInfo(culture);
+                if (string.Equals(culture, DEFAULT, StringComparison.Ordinal))
+                    return Default;
+
+                CultureInfo ci = new CultureInfo(culture);
+
+                if (ci.IsNeutralCulture)
+                    ci = CultureInfo.CreateSpecificCulture(ci.Name);
+
+                return ci;
             }
         }
     }
