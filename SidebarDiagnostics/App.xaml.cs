@@ -87,7 +87,7 @@ namespace SidebarDiagnostics
 
             if (_result == MessageBoxResult.OK)
             {
-                Process.Start(new ProcessStartInfo(ConfigurationManager.AppSettings["WikiURL"]) { UseShellExecute = true });
+                Process.Start(new ProcessStartInfo("https://github.com/ArcadeRenegade/SidebarDiagnostics/wiki") { UseShellExecute = true });
             }
         }
 
@@ -188,7 +188,7 @@ namespace SidebarDiagnostics
 
         private void GitHub_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(ConfigurationManager.AppSettings["RepoURL"]) { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://github.com/hetima/SidebarDiagnostics") { UseShellExecute = true });
         }
 
 
