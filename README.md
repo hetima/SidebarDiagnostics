@@ -11,7 +11,7 @@ Go to the <a href="https://github.com/hetima/SidebarDiagnostics/releases">releas
 - Aligned labels for improved readability (in English)
 - Removed graph window
 - Updated to the latest LibreHardwareMonitor
-- Reduced file size by cleaning up unnecessary DLLs
+- Reduced excutable size by cleaning up unnecessary DLLs
 
 
 ### Features
