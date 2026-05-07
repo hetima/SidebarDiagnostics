@@ -9,9 +9,9 @@
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 	<PropertyGroup>
-		<Version>3.7.4</Version>
-		<AssemblyVersion>3.7.4.0</AssemblyVersion>
-		<FileVersion>3.7.4.0</FileVersion>
+		<Version>4.0.0</Version>
+		<AssemblyVersion>4.0.0.0</AssemblyVersion>
+		<FileVersion>4.0.0.0</FileVersion>
 	</PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
