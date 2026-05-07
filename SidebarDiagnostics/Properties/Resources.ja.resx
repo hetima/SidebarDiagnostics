@@ -122,7 +122,7 @@
     <comment>Name of the app</comment>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>閉じる</value>
+    <value>終了</value>
     <comment>Close app taskbar menu item</comment>
   </data>
   <data name="CPU" xml:space="preserve">

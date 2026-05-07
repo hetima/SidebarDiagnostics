@@ -125,7 +125,7 @@
     <comment>Full name for CPU clock metric</comment>
   </data>
   <data name="ButtonClose" xml:space="preserve">
-    <value>Close</value>
+    <value>Quit</value>
     <comment>Text of the close button</comment>
   </data>
   <data name="CPU" xml:space="preserve">
@@ -225,7 +225,7 @@
     <comment>Short label for CPU core load metric</comment>
   </data>
   <data name="CPUFanLabel" xml:space="preserve">
-    <value>Fan </value>
+    <value> Fan</value>
     <comment>Short label for CPU fan metric</comment>
   </data>
   <data name="CPULoadLabel" xml:space="preserve">
@@ -309,7 +309,7 @@
     <comment>Full name for GPU fan metric</comment>
   </data>
   <data name="GPUFanLabel" xml:space="preserve">
-    <value>Fan </value>
+    <value> Fan</value>
     <comment>Short label for GPU voltage metric</comment>
   </data>
   <data name="GPUTemp" xml:space="preserve">
@@ -349,7 +349,7 @@
     <comment>Full name for network in metric</comment>
   </data>
   <data name="NetworkInLabel" xml:space="preserve">
-    <value>In </value>
+    <value> In</value>
     <comment>Short label for network in metric</comment>
   </data>
   <data name="NetworkOut" xml:space="preserve">
@@ -657,7 +657,7 @@
     <comment>Horizontal offset settings tooltip</comment>
   </data>
   <data name="SettingsHotkeyClose" xml:space="preserve">
-    <value>Close</value>
+    <value>Quit</value>
     <comment>Settings hotkey close label</comment>
   </data>
   <data name="SettingsHotkeyCycleEdge" xml:space="preserve">
