@@ -214,15 +214,6 @@ namespace SidebarDiagnostics.Framework {
         }
         
         /// <summary>
-        ///   Change Log に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ChangeLogTitle {
-            get {
-                return ResourceManager.GetString("ChangeLogTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   CPU に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string CPU {

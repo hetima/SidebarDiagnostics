@@ -429,10 +429,6 @@
     <value>نعم</value>
     <comment>Text of the yes button</comment>
   </data>
-  <data name="ChangeLogTitle" xml:space="preserve">
-    <value>سجل التغييرات</value>
-    <comment>Title of the change log window</comment>
-  </data>
   <data name="ErrorPerformanceCounter" xml:space="preserve">
     <value>التخزين المؤقت تالف.اضغط على زر الموافقة لزيارة الويكي واصلاح الخلل.</value>
     <comment>Text of the performance counter error</comment>

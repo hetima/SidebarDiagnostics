@@ -428,10 +428,6 @@
     <value>是</value>
     <comment>Text of the yes button</comment>
   </data>
-	<data name="ChangeLogTitle" xml:space="preserve">
-    <value>更改日志</value>
-    <comment>Title of the change log window</comment>
-  </data>
 	<data name="ErrorPerformanceCounter" xml:space="preserve">
     <value>您的性能计数器缓存已损坏。 单击“确定”访问 wiki 并修复此错误。</value>
     <comment>Text of the performance counter error</comment>

@@ -34,9 +34,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="ChangeLog.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Properties\app.manifest">
       <SubType>Designer</SubType>
     </None>

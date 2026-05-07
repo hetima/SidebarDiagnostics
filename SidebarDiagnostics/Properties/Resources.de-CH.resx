@@ -185,10 +185,6 @@
     <value>Ja</value>
     <comment>Text of the yes button</comment>
   </data>
-  <data name="ChangeLogTitle" xml:space="preserve">
-    <value>ChangeLog (Änderungen)</value>
-    <comment>Title of the change log window</comment>
-  </data>
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>
     <comment>CPU monitor title</comment>

@@ -15,8 +15,6 @@ namespace SidebarDiagnostics.Utilities
     public static class Paths
     {
         private const string SETTINGS = "settings.json";
-        private const string CHANGELOG = "ChangeLog.json";
-
         public static string Install(Version version)
         {
             return Path.Combine(LocalApp, string.Format("app-{0}", version.ToString(3)));
@@ -25,14 +23,6 @@ namespace SidebarDiagnostics.Utilities
         public static string Exe(Version version)
         {
             return Path.Combine(Install(version), ExeName);
-        }
-
-        public static string ChangeLog
-        {
-            get
-            {
-                return Path.Combine(CurrentDirectory, CHANGELOG);
-            }
         }
 
         public static string CurrentDirectory

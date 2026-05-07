@@ -429,10 +429,6 @@
     <value>Sí</value>
     <comment>Text of the yes button</comment>
   </data>
-  <data name="ChangeLogTitle" xml:space="preserve">
-    <value>Registro de cambios</value>
-    <comment>Title of the change log window</comment>
-  </data>
   <data name="ErrorPerformanceCounter" xml:space="preserve">
     <value>Su caché del Contador de Rendimiento está dañado. Haga clic en Aceptar para visitar la wiki y corregir este error.</value>
     <comment>Text of the performance counter error</comment>

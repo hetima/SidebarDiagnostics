@@ -429,10 +429,6 @@
     <value>Kyllä</value>
     <comment>Text of the yes button</comment>
   </data>
-  <data name="ChangeLogTitle" xml:space="preserve">
-    <value>Muutosloki</value>
-    <comment>Title of the change log window</comment>
-  </data>
   <data name="ErrorPerformanceCounter" xml:space="preserve">
     <value>Suorituskyky laskurin välimuisti on korruptoitunut. Paina OK vieraillaksesi wikissä ja korjataksesi virhe.</value>
     <comment>Text of the performance counter error</comment>

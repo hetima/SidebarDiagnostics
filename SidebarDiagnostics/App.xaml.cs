@@ -71,14 +71,6 @@ namespace SidebarDiagnostics
             Version _version = Assembly.GetExecutingAssembly().GetName().Version;
             string _vstring = _version.ToString(3);
 
-            if (!string.Equals(Framework.Settings.Instance.ChangeLog, _vstring, StringComparison.OrdinalIgnoreCase))
-            {
-                Framework.Settings.Instance.ChangeLog = _vstring;
-                Framework.Settings.Instance.Save();
-
-                new ChangeLog(_version).Show();
-            }
-
             new Sidebar(openSettings, Framework.Settings.Instance.InitiallyHidden).Show();
 
             RefreshIcon();

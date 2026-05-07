@@ -429,10 +429,6 @@
     <value>Evet</value>
     <comment>Text of the yes button</comment>
   </data>
-  <data name="ChangeLogTitle" xml:space="preserve">
-    <value>Günlük Kaydı</value>
-    <comment>Title of the change log window</comment>
-  </data>
   <data name="ErrorPerformanceCounter" xml:space="preserve">
     <value>Performans Sayacı önbelleğiniz bozuk. Wiki'yi ziyaret etmek ve bu hatayı düzeltmek için Tamam'a tıklayın.</value>
     <comment>Text of the performance counter error</comment>

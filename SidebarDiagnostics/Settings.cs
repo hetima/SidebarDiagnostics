@@ -57,23 +57,6 @@ namespace SidebarDiagnostics.Framework
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _changeLog { get; set; } = null;
-
-        [JsonProperty]
-        public string ChangeLog
-        {
-            get
-            {
-                return _changeLog;
-            }
-            set
-            {
-                _changeLog = value;
-
-                NotifyPropertyChanged("ChangeLog");
-            }
-        }
-
         private bool _initialSetup { get; set; } = true;
 
         [JsonProperty]
