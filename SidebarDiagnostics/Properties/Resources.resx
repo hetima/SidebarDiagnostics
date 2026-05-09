@@ -125,7 +125,7 @@
     <comment>Full name for CPU clock metric</comment>
   </data>
   <data name="ButtonClose" xml:space="preserve">
-    <value>Quit</value>
+    <value>Close</value>
     <comment>Text of the close button</comment>
   </data>
   <data name="CPU" xml:space="preserve">
@@ -657,7 +657,7 @@
     <comment>Horizontal offset settings tooltip</comment>
   </data>
   <data name="SettingsHotkeyClose" xml:space="preserve">
-    <value>Quit</value>
+    <value>Close</value>
     <comment>Settings hotkey close label</comment>
   </data>
   <data name="SettingsHotkeyCycleEdge" xml:space="preserve">
