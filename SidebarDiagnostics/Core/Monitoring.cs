@@ -14,10 +14,9 @@ using System.Windows.Threading;
 using System.Windows.Media;
 using LibreHardwareMonitor.Hardware;
 using Newtonsoft.Json;
-using SidebarDiagnostics.Framework;
 using System.Threading.Tasks;
 
-namespace SidebarDiagnostics.Monitoring
+namespace SidebarDiagnostics.Core
 {
     public class MonitorManager : INotifyPropertyChanged, IDisposable
     {
@@ -603,7 +602,7 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
                     {
                         foreach (var coreClock in coreClocks)
                         {
-                            _sensorList.Add(new OHMMetric(coreClock.Sensor, MetricKey.CPUClock, DataType.MHz, string.Format("{0} {1}", Resources.CPUCoreClockLabel, coreClock.Index - 1), (useGHz ? false : true), 0, (useGHz ? MHzToGHz.Instance : null)));
+                            _sensorList.Add(new OHMMetric(coreClock.Sensor, MetricKey.CPUClock, DataType.MHz, string.Format("{0} {1}", Strings.CPUCoreClockLabel, coreClock.Index - 1), (useGHz ? false : true), 0, (useGHz ? MHzToGHz.Instance : null)));
                         }
                     }
                     else
@@ -708,7 +707,7 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
 
                             if (_coreLoad != null)
                             {
-                                _sensorList.Add(new OHMMetric(_coreLoad, MetricKey.CPUCoreLoad, DataType.Percent, string.Format("{0} {1}", Resources.CPUCoreLoadLabel, i - 1), roundAll));
+                                _sensorList.Add(new OHMMetric(_coreLoad, MetricKey.CPUCoreLoad, DataType.Percent, string.Format("{0} {1}", Strings.CPUCoreLoadLabel, i - 1), roundAll));
                             }
                         }
                     }
@@ -1631,7 +1630,7 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
                 {
                     _alertColorFlag = false;
 
-                    if (Framework.Settings.Instance.AlertBlink)
+                    if (Core.Settings.Instance.AlertBlink)
                     {
                         _alertColorTimer = new DispatcherTimer(DispatcherPriority.Normal, App.Current.Dispatcher);
                         _alertColorTimer.Interval = TimeSpan.FromSeconds(0.5d);
@@ -1656,7 +1655,7 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
         {
             get
             {
-                return _alertColorFlag ? Framework.Settings.Instance.FontColor : Framework.Settings.Instance.AlertFontColor;
+                return _alertColorFlag ? Settings.Instance.FontColor : Settings.Instance.AlertFontColor;
             }
         }
 
@@ -2518,46 +2517,46 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
                 switch (Key)
                 {
                     case ParamKey.HardwareNames:
-                        return Resources.SettingsShowHardwareNames;
+                        return Strings.SettingsShowHardwareNames;
 
                     case ParamKey.UseFahrenheit:
-                        return Resources.SettingsUseFahrenheit;
+                        return Strings.SettingsUseFahrenheit;
 
                     case ParamKey.AllCoreClocks:
-                        return Resources.SettingsAllCoreClocks;
+                        return Strings.SettingsAllCoreClocks;
 
                     case ParamKey.CoreLoads:
-                        return Resources.SettingsCoreLoads;
+                        return Strings.SettingsCoreLoads;
 
                     case ParamKey.TempAlert:
-                        return Resources.SettingsTemperatureAlert;
+                        return Strings.SettingsTemperatureAlert;
 
                     case ParamKey.DriveDetails:
-                        return Resources.SettingsShowDriveDetails;
+                        return Strings.SettingsShowDriveDetails;
 
                     case ParamKey.UsedSpaceAlert:
-                        return Resources.SettingsUsedSpaceAlert;
+                        return Strings.SettingsUsedSpaceAlert;
 
                     case ParamKey.BandwidthInAlert:
-                        return Resources.SettingsBandwidthInAlert;
+                        return Strings.SettingsBandwidthInAlert;
 
                     case ParamKey.BandwidthOutAlert:
-                        return Resources.SettingsBandwidthOutAlert;
+                        return Strings.SettingsBandwidthOutAlert;
 
                     case ParamKey.UseBytes:
-                        return Resources.SettingsUseBytesPerSecond;
+                        return Strings.SettingsUseBytesPerSecond;
 
                     case ParamKey.RoundAll:
-                        return Resources.SettingsRoundAllDecimals;
+                        return Strings.SettingsRoundAllDecimals;
 
                     case ParamKey.DriveSpace:
-                        return Resources.SettingsShowDriveSpace;
+                        return Strings.SettingsShowDriveSpace;
 
                     case ParamKey.DriveIO:
-                        return Resources.SettingsShowDriveIO;
+                        return Strings.SettingsShowDriveIO;
 
                     case ParamKey.UseGHz:
-                        return Resources.SettingsUseGHz;
+                        return Strings.SettingsUseGHz;
 
                     default:
                         return "Unknown";
@@ -2572,46 +2571,46 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
                 switch (Key)
                 {
                     case ParamKey.HardwareNames:
-                        return Resources.SettingsShowHardwareNamesTooltip;
+                        return Strings.SettingsShowHardwareNamesTooltip;
 
                     case ParamKey.UseFahrenheit:
-                        return Resources.SettingsUseFahrenheitTooltip;
+                        return Strings.SettingsUseFahrenheitTooltip;
 
                     case ParamKey.AllCoreClocks:
-                        return Resources.SettingsAllCoreClocksTooltip;
+                        return Strings.SettingsAllCoreClocksTooltip;
 
                     case ParamKey.CoreLoads:
-                        return Resources.SettingsCoreLoadsTooltip;
+                        return Strings.SettingsCoreLoadsTooltip;
 
                     case ParamKey.TempAlert:
-                        return Resources.SettingsTemperatureAlertTooltip;
+                        return Strings.SettingsTemperatureAlertTooltip;
 
                     case ParamKey.DriveDetails:
-                        return Resources.SettingsDriveDetailsTooltip;
+                        return Strings.SettingsDriveDetailsTooltip;
 
                     case ParamKey.UsedSpaceAlert:
-                        return Resources.SettingsUsedSpaceAlertTooltip;
+                        return Strings.SettingsUsedSpaceAlertTooltip;
 
                     case ParamKey.BandwidthInAlert:
-                        return Resources.SettingsBandwidthInAlertTooltip;
+                        return Strings.SettingsBandwidthInAlertTooltip;
 
                     case ParamKey.BandwidthOutAlert:
-                        return Resources.SettingsBandwidthOutAlertTooltip;
+                        return Strings.SettingsBandwidthOutAlertTooltip;
 
                     case ParamKey.UseBytes:
-                        return Resources.SettingsUseBytesPerSecondTooltip;
+                        return Strings.SettingsUseBytesPerSecondTooltip;
 
                     case ParamKey.RoundAll:
-                        return Resources.SettingsRoundAllDecimalsTooltip;
+                        return Strings.SettingsRoundAllDecimalsTooltip;
 
                     case ParamKey.DriveSpace:
-                        return Resources.SettingsShowDriveSpaceTooltip;
+                        return Strings.SettingsShowDriveSpaceTooltip;
 
                     case ParamKey.DriveIO:
-                        return Resources.SettingsShowDriveIOTooltip;
+                        return Strings.SettingsShowDriveIOTooltip;
 
                     case ParamKey.UseGHz:
-                        return Resources.SettingsUseGHzTooltip;
+                        return Strings.SettingsUseGHzTooltip;
 
                     default:
                         return "Unknown";
@@ -3062,19 +3061,19 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
             switch (type)
             {
                 case MonitorType.CPU:
-                    return Resources.CPU;
+                    return Strings.CPU;
 
                 case MonitorType.RAM:
-                    return Resources.RAM;
+                    return Strings.RAM;
 
                 case MonitorType.GPU:
-                    return Resources.GPU;
+                    return Strings.GPU;
 
                 case MonitorType.HD:
-                    return Resources.Drives;
+                    return Strings.Drives;
 
                 case MonitorType.Network:
-                    return Resources.Network;
+                    return Strings.Network;
 
                 default:
                     throw new ArgumentException("Invalid MonitorType.");
@@ -3091,88 +3090,88 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
             switch (key)
             {
                 case MetricKey.CPUClock:
-                    return Resources.CPUClock;
+                    return Strings.CPUClock;
 
                 case MetricKey.CPUTemp:
-                    return Resources.CPUTemp;
+                    return Strings.CPUTemp;
 
                 case MetricKey.CPUVoltage:
-                    return Resources.CPUVoltage;
+                    return Strings.CPUVoltage;
 
                 case MetricKey.CPUFan:
-                    return Resources.CPUFan;
+                    return Strings.CPUFan;
 
                 case MetricKey.CPULoad:
-                    return Resources.CPULoad;
+                    return Strings.CPULoad;
 
                 case MetricKey.CPUCoreLoad:
-                    return Resources.CPUCoreLoad;
+                    return Strings.CPUCoreLoad;
 
                 case MetricKey.RAMClock:
-                    return Resources.RAMClock;
+                    return Strings.RAMClock;
 
                 case MetricKey.RAMVoltage:
-                    return Resources.RAMVoltage;
+                    return Strings.RAMVoltage;
 
                 case MetricKey.RAMLoad:
-                    return Resources.RAMLoad;
+                    return Strings.RAMLoad;
 
                 case MetricKey.RAMUsed:
-                    return Resources.RAMUsed;
+                    return Strings.RAMUsed;
 
                 case MetricKey.RAMFree:
-                    return Resources.RAMFree;
+                    return Strings.RAMFree;
 
                 case MetricKey.GPUCoreClock:
-                    return Resources.GPUCoreClock;
+                    return Strings.GPUCoreClock;
 
                 case MetricKey.GPUVRAMClock:
-                    return Resources.GPUVRAMClock;
+                    return Strings.GPUVRAMClock;
 
                 case MetricKey.GPUCoreLoad:
-                    return Resources.GPUCoreLoad;
+                    return Strings.GPUCoreLoad;
 
                 case MetricKey.GPUVRAMLoad:
-                    return Resources.GPUVRAMLoad;
+                    return Strings.GPUVRAMLoad;
 
                 case MetricKey.GPUVoltage:
-                    return Resources.GPUVoltage;
+                    return Strings.GPUVoltage;
 
                 case MetricKey.GPUTemp:
-                    return Resources.GPUTemp;
+                    return Strings.GPUTemp;
 
                 case MetricKey.GPUFan:
-                    return Resources.GPUFan;
+                    return Strings.GPUFan;
 
                 case MetricKey.NetworkIP:
-                    return Resources.NetworkIP;
+                    return Strings.NetworkIP;
 
                 case MetricKey.NetworkExtIP:
-                    return Resources.NetworkExtIP;
+                    return Strings.NetworkExtIP;
 
                 case MetricKey.NetworkIn:
-                    return Resources.NetworkIn;
+                    return Strings.NetworkIn;
 
                 case MetricKey.NetworkOut:
-                    return Resources.NetworkOut;
+                    return Strings.NetworkOut;
 
                 case MetricKey.DriveLoadBar:
-                    return Resources.DriveLoadBar;
+                    return Strings.DriveLoadBar;
 
                 case MetricKey.DriveLoad:
-                    return Resources.DriveLoad;
+                    return Strings.DriveLoad;
 
                 case MetricKey.DriveUsed:
-                    return Resources.DriveUsed;
+                    return Strings.DriveUsed;
 
                 case MetricKey.DriveFree:
-                    return Resources.DriveFree;
+                    return Strings.DriveFree;
 
                 case MetricKey.DriveRead:
-                    return Resources.DriveRead;
+                    return Strings.DriveRead;
 
                 case MetricKey.DriveWrite:
-                    return Resources.DriveWrite;
+                    return Strings.DriveWrite;
 
                 default:
                     return "Unknown";
@@ -3184,88 +3183,88 @@ MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Sel
             switch (key)
             {
                 case MetricKey.CPUClock:
-                    return Resources.CPUClockLabel;
+                    return Strings.CPUClockLabel;
 
                 case MetricKey.CPUTemp:
-                    return Resources.CPUTempLabel;
+                    return Strings.CPUTempLabel;
 
                 case MetricKey.CPUVoltage:
-                    return Resources.CPUVoltageLabel;
+                    return Strings.CPUVoltageLabel;
 
                 case MetricKey.CPUFan:
-                    return Resources.CPUFanLabel;
+                    return Strings.CPUFanLabel;
 
                 case MetricKey.CPULoad:
-                    return Resources.CPULoadLabel;
+                    return Strings.CPULoadLabel;
 
                 case MetricKey.CPUCoreLoad:
-                    return Resources.CPUCoreLoadLabel;
+                    return Strings.CPUCoreLoadLabel;
 
                 case MetricKey.RAMClock:
-                    return Resources.RAMClockLabel;
+                    return Strings.RAMClockLabel;
 
                 case MetricKey.RAMVoltage:
-                    return Resources.RAMVoltageLabel;
+                    return Strings.RAMVoltageLabel;
 
                 case MetricKey.RAMLoad:
-                    return Resources.RAMLoadLabel;
+                    return Strings.RAMLoadLabel;
 
                 case MetricKey.RAMUsed:
-                    return Resources.RAMUsedLabel;
+                    return Strings.RAMUsedLabel;
 
                 case MetricKey.RAMFree:
-                    return Resources.RAMFreeLabel;
+                    return Strings.RAMFreeLabel;
 
                 case MetricKey.GPUCoreClock:
-                    return Resources.GPUCoreClockLabel;
+                    return Strings.GPUCoreClockLabel;
 
                 case MetricKey.GPUVRAMClock:
-                    return Resources.GPUVRAMClockLabel;
+                    return Strings.GPUVRAMClockLabel;
 
                 case MetricKey.GPUCoreLoad:
-                    return Resources.GPUCoreLoadLabel;
+                    return Strings.GPUCoreLoadLabel;
 
                 case MetricKey.GPUVRAMLoad:
-                    return Resources.GPUVRAMLoadLabel;
+                    return Strings.GPUVRAMLoadLabel;
 
                 case MetricKey.GPUVoltage:
-                    return Resources.GPUVoltageLabel;
+                    return Strings.GPUVoltageLabel;
 
                 case MetricKey.GPUTemp:
-                    return Resources.GPUTempLabel;
+                    return Strings.GPUTempLabel;
 
                 case MetricKey.GPUFan:
-                    return Resources.GPUFanLabel;
+                    return Strings.GPUFanLabel;
 
                 case MetricKey.NetworkIP:
-                    return Resources.NetworkIPLabel;
+                    return Strings.NetworkIPLabel;
 
                 case MetricKey.NetworkExtIP:
-                    return Resources.NetworkExtIPLabel;
+                    return Strings.NetworkExtIPLabel;
 
                 case MetricKey.NetworkIn:
-                    return Resources.NetworkInLabel;
+                    return Strings.NetworkInLabel;
 
                 case MetricKey.NetworkOut:
-                    return Resources.NetworkOutLabel;
+                    return Strings.NetworkOutLabel;
 
                 case MetricKey.DriveLoadBar:
-                    return Resources.DriveLoadBarLabel;
+                    return Strings.DriveLoadBarLabel;
 
                 case MetricKey.DriveLoad:
-                    return Resources.DriveLoadLabel;
+                    return Strings.DriveLoadLabel;
 
                 case MetricKey.DriveUsed:
-                    return Resources.DriveUsedLabel;
+                    return Strings.DriveUsedLabel;
 
                 case MetricKey.DriveFree:
-                    return Resources.DriveFreeLabel;
+                    return Strings.DriveFreeLabel;
 
                 case MetricKey.DriveRead:
-                    return Resources.DriveReadLabel;
+                    return Strings.DriveReadLabel;
 
                 case MetricKey.DriveWrite:
-                    return Resources.DriveWriteLabel;
+                    return Strings.DriveWriteLabel;
 
                 default:
                     return "Unknown";

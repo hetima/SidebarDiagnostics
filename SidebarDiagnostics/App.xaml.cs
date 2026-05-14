@@ -9,7 +9,8 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Hardcodet.Wpf.TaskbarNotification;
-using SidebarDiagnostics.Monitoring;
+using SidebarDiagnostics;
+using SidebarDiagnostics.Core;
 using SidebarDiagnostics.Utilities;
 using SidebarDiagnostics.Windows;
 using Xceed.Wpf.Toolkit;
@@ -45,11 +46,11 @@ namespace SidebarDiagnostics
 
             // TRAY ICON
             TrayIcon = (TaskbarIcon)FindResource("TrayIcon");
-            TrayIcon.ToolTipText = string.Format("{0} v{1}", Framework.Resources.AppName, _vstring);
+            TrayIcon.ToolTipText = string.Format("{0} v{1}", Strings.AppName, _vstring);
             TrayIcon.TrayContextMenuOpen += TrayIcon_TrayContextMenuOpen;
 
             // START APP
-            if (Framework.Settings.Instance.InitialSetup)
+            if (Core.Settings.Instance.InitialSetup)
             {
                 new Setup();
             }
@@ -71,19 +72,19 @@ namespace SidebarDiagnostics
             Version _version = Assembly.GetExecutingAssembly().GetName().Version;
             string _vstring = _version.ToString(3);
 
-            new Sidebar(openSettings, Framework.Settings.Instance.InitiallyHidden).Show();
+            new Sidebar(openSettings, Core.Settings.Instance.InitiallyHidden).Show();
 
             RefreshIcon();
         }
 
         public static void RefreshIcon()
         {
-            TrayIcon.Visibility = Framework.Settings.Instance.ShowTrayIcon ? Visibility.Visible : Visibility.Collapsed;
+            TrayIcon.Visibility = Core.Settings.Instance.ShowTrayIcon ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public static void ShowPerformanceCounterError()
         {
-            MessageBoxResult _result = System.Windows.MessageBox.Show(Framework.Resources.ErrorPerformanceCounter, Framework.Resources.ErrorTitle, MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+            MessageBoxResult _result = System.Windows.MessageBox.Show(Strings.ErrorPerformanceCounter, Strings.ErrorTitle, MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
 
             if (_result == MessageBoxResult.OK)
             {
@@ -114,12 +115,12 @@ namespace SidebarDiagnostics
 
         private void CheckSettings()
         {
-            if (Framework.Settings.Instance.RunAtStartup && !Utilities.Startup.StartupTaskExists())
+            if (Core.Settings.Instance.RunAtStartup && !Utilities.Startup.StartupTaskExists())
             {
                 Utilities.Startup.EnableStartupTask();
             }
 
-            Framework.Settings.Instance.MonitorConfig = MonitorConfig.CheckConfig(Framework.Settings.Instance.MonitorConfig);
+            Core.Settings.Instance.MonitorConfig = MonitorConfig.CheckConfig(Core.Settings.Instance.MonitorConfig);
         }
 
         private void TrayIcon_TrayContextMenuOpen(object sender, RoutedEventArgs e)
@@ -201,7 +202,7 @@ namespace SidebarDiagnostics
         {
             Exception ex = (Exception)e.ExceptionObject;
 
-            System.Windows.MessageBox.Show(ex.ToString(), Framework.Resources.ErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+            System.Windows.MessageBox.Show(ex.ToString(), Strings.ErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
         }
         
         public Sidebar Sidebar

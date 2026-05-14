@@ -6,9 +6,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using SidebarDiagnostics.Utilities;
-using SidebarDiagnostics.Monitoring;
+using SidebarDiagnostics.Core;
 using SidebarDiagnostics.Windows;
-using SidebarDiagnostics.Framework;
 using System.Windows.Media;
 using System.Drawing.Text;
 
@@ -20,19 +19,19 @@ namespace SidebarDiagnostics.Models
         {
             DockEdgeItems = new DockItem[2]
             {
-                new DockItem() { Text = Resources.SettingsDockLeft, Value = DockEdge.Left },
-                new DockItem() { Text = Resources.SettingsDockRight, Value = DockEdge.Right }
+                new DockItem() { Text = Strings.SettingsDockLeft, Value = DockEdge.Left },
+                new DockItem() { Text = Strings.SettingsDockRight, Value = DockEdge.Right }
             };
 
-            DockEdge = Framework.Settings.Instance.DockEdge;
+            DockEdge = Core.Settings.Instance.DockEdge;
 
             Monitor[] _monitors = Monitor.GetMonitors();
 
             ScreenItems = _monitors.Select((s, i) => new ScreenItem() { Index = i, Text = string.Format("#{0}", i + 1) }).ToArray();
 
-            if (Framework.Settings.Instance.ScreenIndex < _monitors.Length)
+            if (Core.Settings.Instance.ScreenIndex < _monitors.Length)
             {
-                ScreenIndex = Framework.Settings.Instance.ScreenIndex;
+                ScreenIndex = Core.Settings.Instance.ScreenIndex;
             }
             else
             {
@@ -40,30 +39,30 @@ namespace SidebarDiagnostics.Models
             }
 
             CultureItems = Utilities.Culture.GetAll();
-            Culture = Framework.Settings.Instance.Culture;
+            Culture = Core.Settings.Instance.Culture;
 
-            UIScale = Framework.Settings.Instance.UIScale;
-            XOffset = Framework.Settings.Instance.XOffset;
-            YOffset = Framework.Settings.Instance.YOffset;
-            PollingInterval = Framework.Settings.Instance.PollingInterval;
-            UseAppBar = Framework.Settings.Instance.UseAppBar;
-            AlwaysTop = Framework.Settings.Instance.AlwaysTop;
-            ToolbarMode = Framework.Settings.Instance.ToolbarMode;
-            ClickThrough = Framework.Settings.Instance.ClickThrough;
-            ShowTrayIcon = Framework.Settings.Instance.ShowTrayIcon;
-            RunAtStartup = Framework.Settings.Instance.RunAtStartup;
-            SidebarWidth = Framework.Settings.Instance.SidebarWidth;
-            AutoBGColor = Framework.Settings.Instance.AutoBGColor;
-            BGColor = Framework.Settings.Instance.BGColor;
-            BGOpacity = Framework.Settings.Instance.BGOpacity;
+            UIScale = Core.Settings.Instance.UIScale;
+            XOffset = Core.Settings.Instance.XOffset;
+            YOffset = Core.Settings.Instance.YOffset;
+            PollingInterval = Core.Settings.Instance.PollingInterval;
+            UseAppBar = Core.Settings.Instance.UseAppBar;
+            AlwaysTop = Core.Settings.Instance.AlwaysTop;
+            ToolbarMode = Core.Settings.Instance.ToolbarMode;
+            ClickThrough = Core.Settings.Instance.ClickThrough;
+            ShowTrayIcon = Core.Settings.Instance.ShowTrayIcon;
+            RunAtStartup = Core.Settings.Instance.RunAtStartup;
+            SidebarWidth = Core.Settings.Instance.SidebarWidth;
+            AutoBGColor = Core.Settings.Instance.AutoBGColor;
+            BGColor = Core.Settings.Instance.BGColor;
+            BGOpacity = Core.Settings.Instance.BGOpacity;
 
             TextAlignItems = new TextAlignItem[2]
             {
-                new TextAlignItem() { Text = Resources.SettingsTextAlignLeft, Value = TextAlign.Left },
-                new TextAlignItem() { Text = Resources.SettingsTextAlignRight, Value = TextAlign.Right }
+                new TextAlignItem() { Text = Strings.SettingsTextAlignLeft, Value = TextAlign.Left },
+                new TextAlignItem() { Text = Strings.SettingsTextAlignRight, Value = TextAlign.Right }
             };
 
-            TextAlign = Framework.Settings.Instance.TextAlign;
+            TextAlign = Core.Settings.Instance.TextAlign;
 
             FontSettingItems = new FontSetting[5]
             {
@@ -76,11 +75,11 @@ namespace SidebarDiagnostics.Models
 
             FontNameItems = Fonts.SystemFontFamilies.Select(i => i.Source).ToArray();
 
-            FontSetting = Framework.Settings.Instance.FontSetting;
-            FontName = Framework.Settings.Instance.FontName;
-            FontColor = Framework.Settings.Instance.FontColor;
-            AlertFontColor = Framework.Settings.Instance.AlertFontColor;
-            AlertBlink = Framework.Settings.Instance.AlertBlink;
+            FontSetting = Core.Settings.Instance.FontSetting;
+            FontName = Core.Settings.Instance.FontName;
+            FontColor = Core.Settings.Instance.FontColor;
+            AlertFontColor = Core.Settings.Instance.AlertFontColor;
+            AlertBlink = Core.Settings.Instance.AlertBlink;
 
             DateSettingItems = new DateSetting[4]
             {
@@ -90,14 +89,14 @@ namespace SidebarDiagnostics.Models
                 DateSetting.Long
             };
 
-            DateSetting = Framework.Settings.Instance.DateSetting;
-            CollapseMenuBar = Framework.Settings.Instance.CollapseMenuBar;
-            InitiallyHidden = Framework.Settings.Instance.InitiallyHidden;
-            ShowMachineName = Framework.Settings.Instance.ShowMachineName;
-            ShowClock = Framework.Settings.Instance.ShowClock;
-            Clock24HR = Framework.Settings.Instance.Clock24HR;
+            DateSetting = Core.Settings.Instance.DateSetting;
+            CollapseMenuBar = Core.Settings.Instance.CollapseMenuBar;
+            InitiallyHidden = Core.Settings.Instance.InitiallyHidden;
+            ShowMachineName = Core.Settings.Instance.ShowMachineName;
+            ShowClock = Core.Settings.Instance.ShowClock;
+            Clock24HR = Core.Settings.Instance.Clock24HR;
 
-            ObservableCollection<MonitorConfig> _config = new ObservableCollection<MonitorConfig>(Framework.Settings.Instance.MonitorConfig.Select(c => c.Clone()).OrderByDescending(c => c.Order));
+            ObservableCollection<MonitorConfig> _config = new ObservableCollection<MonitorConfig>(Core.Settings.Instance.MonitorConfig.Select(c => c.Clone()).OrderByDescending(c => c.Order));
 
             if (sidebar.Ready)
             {
@@ -115,16 +114,16 @@ namespace SidebarDiagnostics.Models
 
             MonitorConfig = _config;
 
-            if (Framework.Settings.Instance.Hotkeys != null)
+            if (Core.Settings.Instance.Hotkeys != null)
             {
-                ToggleKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Toggle);
-                ShowKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Show);
-                HideKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Hide);
-                ReloadKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Reload);
-                CloseKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Close);
-                CycleEdgeKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.CycleEdge);
-                CycleScreenKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.CycleScreen);
-                ReserveSpaceKey = Framework.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.ReserveSpace);
+                ToggleKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Toggle);
+                ShowKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Show);
+                HideKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Hide);
+                ReloadKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Reload);
+                CloseKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.Close);
+                CycleEdgeKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.CycleEdge);
+                CycleScreenKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.CycleScreen);
+                ReserveSpaceKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.ReserveSpace);
             }
 
             IsChanged = false;
@@ -132,40 +131,40 @@ namespace SidebarDiagnostics.Models
 
         public void Save()
         {
-            if (!string.Equals(Culture, Framework.Settings.Instance.Culture, StringComparison.Ordinal))
+            if (!string.Equals(Culture, Core.Settings.Instance.Culture, StringComparison.Ordinal))
             {
-                MessageBox.Show(Resources.LanguageChangedText, Resources.LanguageChangedTitle, MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+                MessageBox.Show(Strings.LanguageChangedText, Strings.LanguageChangedTitle, MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
 
-            Framework.Settings.Instance.DockEdge = DockEdge;
-            Framework.Settings.Instance.ScreenIndex = ScreenIndex;
-            Framework.Settings.Instance.Culture = Culture;
-            Framework.Settings.Instance.UIScale = UIScale;
-            Framework.Settings.Instance.XOffset = XOffset;
-            Framework.Settings.Instance.YOffset = YOffset;
-            Framework.Settings.Instance.PollingInterval = PollingInterval;
-            Framework.Settings.Instance.UseAppBar = UseAppBar;
-            Framework.Settings.Instance.AlwaysTop = AlwaysTop;
-            Framework.Settings.Instance.ToolbarMode = ToolbarMode;
-            Framework.Settings.Instance.ClickThrough = ClickThrough;
-            Framework.Settings.Instance.ShowTrayIcon = ShowTrayIcon;
-            Framework.Settings.Instance.RunAtStartup = RunAtStartup;
-            Framework.Settings.Instance.SidebarWidth = SidebarWidth;
-            Framework.Settings.Instance.AutoBGColor = AutoBGColor;
-            Framework.Settings.Instance.BGColor = BGColor;
-            Framework.Settings.Instance.BGOpacity = BGOpacity;
-            Framework.Settings.Instance.TextAlign = TextAlign;
-            Framework.Settings.Instance.FontSetting = FontSetting;
-            Framework.Settings.Instance.FontName = FontName;
-            Framework.Settings.Instance.FontColor = FontColor;
-            Framework.Settings.Instance.AlertFontColor = AlertFontColor;
-            Framework.Settings.Instance.AlertBlink = AlertBlink;
-            Framework.Settings.Instance.DateSetting = DateSetting;
-            Framework.Settings.Instance.CollapseMenuBar = CollapseMenuBar;
-            Framework.Settings.Instance.InitiallyHidden = InitiallyHidden;
-            Framework.Settings.Instance.ShowMachineName = ShowMachineName;
-            Framework.Settings.Instance.ShowClock = ShowClock;
-            Framework.Settings.Instance.Clock24HR = Clock24HR;
+            Core.Settings.Instance.DockEdge = DockEdge;
+            Core.Settings.Instance.ScreenIndex = ScreenIndex;
+            Core.Settings.Instance.Culture = Culture;
+            Core.Settings.Instance.UIScale = UIScale;
+            Core.Settings.Instance.XOffset = XOffset;
+            Core.Settings.Instance.YOffset = YOffset;
+            Core.Settings.Instance.PollingInterval = PollingInterval;
+            Core.Settings.Instance.UseAppBar = UseAppBar;
+            Core.Settings.Instance.AlwaysTop = AlwaysTop;
+            Core.Settings.Instance.ToolbarMode = ToolbarMode;
+            Core.Settings.Instance.ClickThrough = ClickThrough;
+            Core.Settings.Instance.ShowTrayIcon = ShowTrayIcon;
+            Core.Settings.Instance.RunAtStartup = RunAtStartup;
+            Core.Settings.Instance.SidebarWidth = SidebarWidth;
+            Core.Settings.Instance.AutoBGColor = AutoBGColor;
+            Core.Settings.Instance.BGColor = BGColor;
+            Core.Settings.Instance.BGOpacity = BGOpacity;
+            Core.Settings.Instance.TextAlign = TextAlign;
+            Core.Settings.Instance.FontSetting = FontSetting;
+            Core.Settings.Instance.FontName = FontName;
+            Core.Settings.Instance.FontColor = FontColor;
+            Core.Settings.Instance.AlertFontColor = AlertFontColor;
+            Core.Settings.Instance.AlertBlink = AlertBlink;
+            Core.Settings.Instance.DateSetting = DateSetting;
+            Core.Settings.Instance.CollapseMenuBar = CollapseMenuBar;
+            Core.Settings.Instance.InitiallyHidden = InitiallyHidden;
+            Core.Settings.Instance.ShowMachineName = ShowMachineName;
+            Core.Settings.Instance.ShowClock = ShowClock;
+            Core.Settings.Instance.Clock24HR = Clock24HR;
 
             MonitorConfig[] _config = MonitorConfig.Select(c => c.Clone()).ToArray();
 
@@ -189,7 +188,7 @@ namespace SidebarDiagnostics.Models
                 _config[i].Order = Convert.ToByte(_config.Length - i);
             }
 
-            Framework.Settings.Instance.MonitorConfig = _config;
+            Core.Settings.Instance.MonitorConfig = _config;
 
             List<Hotkey> _hotkeys = new List<Hotkey>();
 
@@ -233,9 +232,9 @@ namespace SidebarDiagnostics.Models
                 _hotkeys.Add(ReserveSpaceKey);
             }
 
-            Framework.Settings.Instance.Hotkeys = _hotkeys.ToArray();
+            Core.Settings.Instance.Hotkeys = _hotkeys.ToArray();
 
-            Framework.Settings.Instance.Save();
+            Core.Settings.Instance.Save();
 
             App.RefreshIcon();
 

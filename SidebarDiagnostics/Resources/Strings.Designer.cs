@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SidebarDiagnostics.Framework {
+namespace SidebarDiagnostics {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace SidebarDiagnostics.Framework {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace SidebarDiagnostics.Framework {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SidebarDiagnostics.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SidebarDiagnostics.SidebarDiagnostics.Resources.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -286,7 +286,7 @@ namespace SidebarDiagnostics.Framework {
         }
         
         /// <summary>
-        ///   Fan  に類似しているローカライズされた文字列を検索します。
+        ///    Fan に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string CPUFanLabel {
             get {
@@ -538,7 +538,7 @@ namespace SidebarDiagnostics.Framework {
         }
         
         /// <summary>
-        ///   Fan  に類似しているローカライズされた文字列を検索します。
+        ///    Fan に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string GPUFanLabel {
             get {
@@ -673,7 +673,7 @@ namespace SidebarDiagnostics.Framework {
         }
         
         /// <summary>
-        ///   In  に類似しているローカライズされた文字列を検索します。
+        ///    In に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string NetworkInLabel {
             get {

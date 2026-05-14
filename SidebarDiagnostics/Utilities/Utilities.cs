@@ -7,7 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using Microsoft.Win32.TaskScheduler;
-using SidebarDiagnostics.Framework;
+using SidebarDiagnostics.Core;
 using System.Diagnostics;
 
 namespace SidebarDiagnostics.Utilities
@@ -155,7 +155,7 @@ public static class Startup
         {
             using (EventLog log = new EventLog("Application"))
             {
-                log.Source = Resources.AppName;
+                log.Source = Strings.AppName;
                 log.WriteEntry(e.ToString(), EventLogEntryType.Error, 100, 1);
             }
         }
@@ -213,7 +213,7 @@ public static class Startup
 
         public static void SetCurrent(bool init)
         {
-            Resources.Culture = CultureInfo;
+            Strings.Culture = CultureInfo;
 
             Thread.CurrentThread.CurrentCulture = CultureInfo;
             Thread.CurrentThread.CurrentUICulture = CultureInfo;
@@ -226,7 +226,7 @@ public static class Startup
 
         public static CultureItem[] GetAll()
         {
-            return new CultureItem[1] { new CultureItem() { Value = DEFAULT, Text = Resources.SettingsLanguageDefault } }.Concat(Languages.Select(lang => new CultureInfo(lang)).OrderBy(c => c.DisplayName).Select(c => new CultureItem() { Value = c.Name, Text = c.DisplayName })).ToArray();
+            return new CultureItem[1] { new CultureItem() { Value = DEFAULT, Text = Strings.SettingsLanguageDefault } }.Concat(Languages.Select(lang => new CultureInfo(lang)).OrderBy(c => c.DisplayName).Select(c => new CultureItem() { Value = c.Name, Text = c.DisplayName })).ToArray();
         }
 
         public static string[] Languages
@@ -243,7 +243,7 @@ public static class Startup
         {
             get
             {
-                string culture = Framework.Settings.Instance.Culture;
+                string culture = Core.Settings.Instance.Culture;
                 if (string.Equals(culture, DEFAULT, StringComparison.Ordinal))
                     return Default;
 

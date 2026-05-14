@@ -575,19 +575,19 @@ namespace SidebarDiagnostics.Windows
                         case KeyAction.CycleEdge:
                             if (_sidebar.Visibility == Visibility.Visible)
                             {
-                                switch (Framework.Settings.Instance.DockEdge)
+                                switch (Core.Settings.Instance.DockEdge)
                                 {
                                     case DockEdge.Right:
-                                        Framework.Settings.Instance.DockEdge = DockEdge.Left;
+                                        Core.Settings.Instance.DockEdge = DockEdge.Left;
                                         break;
 
                                     default:
                                     case DockEdge.Left:
-                                        Framework.Settings.Instance.DockEdge = DockEdge.Right;
+                                        Core.Settings.Instance.DockEdge = DockEdge.Right;
                                         break;
                                 }
 
-                                Framework.Settings.Instance.Save();
+                                Core.Settings.Instance.Save();
 
                                 _sidebar.Reposition();
                             }
@@ -598,24 +598,24 @@ namespace SidebarDiagnostics.Windows
                             {
                                 Monitor[] _monitors = Monitor.GetMonitors();
 
-                                if (Framework.Settings.Instance.ScreenIndex < (_monitors.Length - 1))
+                                if (Core.Settings.Instance.ScreenIndex < (_monitors.Length - 1))
                                 {
-                                    Framework.Settings.Instance.ScreenIndex++;
+                                    Core.Settings.Instance.ScreenIndex++;
                                 }
                                 else
                                 {
-                                    Framework.Settings.Instance.ScreenIndex = 0;
+                                    Core.Settings.Instance.ScreenIndex = 0;
                                 }
 
-                                Framework.Settings.Instance.Save();
+                                Core.Settings.Instance.Save();
 
                                 _sidebar.Reposition();
                             }
                             break;
 
                         case KeyAction.ReserveSpace:
-                            Framework.Settings.Instance.UseAppBar = !Framework.Settings.Instance.UseAppBar;
-                            Framework.Settings.Instance.Save();
+                            Core.Settings.Instance.UseAppBar = !Core.Settings.Instance.UseAppBar;
+                            Core.Settings.Instance.Save();
 
                             _sidebar.Reposition();
                             break;
@@ -849,10 +849,10 @@ namespace SidebarDiagnostics.Windows
 
         public static void GetWorkArea(AppBarWindow window, out int screen, out DockEdge edge, out WorkArea initPos, out WorkArea windowWA, out WorkArea appbarWA)
         {
-            screen = Framework.Settings.Instance.ScreenIndex;
-            edge = Framework.Settings.Instance.DockEdge;
+            screen = Core.Settings.Instance.ScreenIndex;
+            edge = Core.Settings.Instance.DockEdge;
 
-            double _uiScale = Framework.Settings.Instance.UIScale;
+            double _uiScale = Core.Settings.Instance.UIScale;
 
             if (OS.SupportDPI)
             {
@@ -883,12 +883,12 @@ namespace SidebarDiagnostics.Windows
 
             windowWA.Offset(_modifyX, _modifyY);
 
-            double _windowWidth = Framework.Settings.Instance.SidebarWidth * _uiScale;
+            double _windowWidth = Core.Settings.Instance.SidebarWidth * _uiScale;
 
             windowWA.SetWidth(edge, _windowWidth);
 
-            int _offsetX = Framework.Settings.Instance.XOffset;
-            int _offsetY = Framework.Settings.Instance.YOffset;
+            int _offsetX = Core.Settings.Instance.XOffset;
+            int _offsetY = Core.Settings.Instance.YOffset;
 
             windowWA.Offset(_offsetX, _offsetY);
 
@@ -899,7 +899,7 @@ namespace SidebarDiagnostics.Windows
 
             appbarWA.Offset(_modifyX, _modifyY);
 
-            double _appbarWidth = Framework.Settings.Instance.UseAppBar ? windowWA.Width * _active.ScaleX : 0;
+            double _appbarWidth = Core.Settings.Instance.UseAppBar ? windowWA.Width * _active.ScaleX : 0;
 
             appbarWA.SetWidth(edge, _appbarWidth);
 
@@ -954,7 +954,7 @@ namespace SidebarDiagnostics.Windows
 
             //Monitor _monitorInfo = Monitor.GetMonitor(_hmonitor);
 
-            double _uiScale = Framework.Settings.Instance.UIScale;
+            double _uiScale = Core.Settings.Instance.UIScale;
 
             UpdateScale(_uiScale, _uiScale, true);
         }
@@ -982,7 +982,7 @@ namespace SidebarDiagnostics.Windows
         {
             HandleDPI();
 
-            Framework.Settings.Instance.PropertyChanged += UIScale_PropertyChanged;
+            Core.Settings.Instance.PropertyChanged += UIScale_PropertyChanged;
 
             //HwndSource.AddHook(WindowHook);
         }
@@ -1455,7 +1455,7 @@ namespace SidebarDiagnostics.Windows
 
         public virtual async Task AppBarShow()
         {
-            if (Framework.Settings.Instance.UseAppBar)
+            if (Core.Settings.Instance.UseAppBar)
             {
                 await SetAppBar();
             }

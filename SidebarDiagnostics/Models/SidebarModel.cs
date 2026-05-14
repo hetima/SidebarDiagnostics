@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Threading;
-using SidebarDiagnostics.Monitoring;
+using SidebarDiagnostics.Core;
 using SidebarDiagnostics.Utilities;
 
 namespace SidebarDiagnostics.Models
@@ -77,28 +77,28 @@ namespace SidebarDiagnostics.Models
 
         private void InitMachineName()
         {
-            ShowMachineName = Framework.Settings.Instance.ShowMachineName;
+            ShowMachineName = Core.Settings.Instance.ShowMachineName;
 
             MachineName = Environment.MachineName;
         }
 
         private void InitClock()
         {
-            ShowClock = Framework.Settings.Instance.ShowClock;
+            ShowClock = Core.Settings.Instance.ShowClock;
 
             if (!ShowClock)
             {
                 return;
             }
 
-            ShowDate = !Framework.Settings.Instance.DateSetting.Equals(Framework.DateSetting.Disabled);
+            ShowDate = !Core.Settings.Instance.DateSetting.Equals(Core.DateSetting.Disabled);
 
             UpdateClock();
         }
 
         private void InitMonitors()
         {
-            MonitorManager = new MonitorManager(Framework.Settings.Instance.MonitorConfig);
+            MonitorManager = new MonitorManager(Core.Settings.Instance.MonitorConfig);
             MonitorManager.Update();
         }
 
@@ -118,7 +118,7 @@ namespace SidebarDiagnostics.Models
         private void StartMonitors()
         {
             _monitorTimer = new DispatcherTimer();
-            _monitorTimer.Interval = TimeSpan.FromMilliseconds(Framework.Settings.Instance.PollingInterval);
+            _monitorTimer.Interval = TimeSpan.FromMilliseconds(Core.Settings.Instance.PollingInterval);
             _monitorTimer.Tick += new EventHandler(MonitorTimer_Tick);
             _monitorTimer.Start();
         }
@@ -127,11 +127,11 @@ namespace SidebarDiagnostics.Models
         {
             DateTime _now = DateTime.Now;
 
-            Time = _now.ToString(Framework.Settings.Instance.Clock24HR ? "H:mm:ss" : "h:mm:ss tt", Culture.Default);
+            Time = _now.ToString(Core.Settings.Instance.Clock24HR ? "H:mm:ss" : "h:mm:ss tt", Culture.Default);
 
             if (ShowDate)
             {
-                Date = _now.ToString(Framework.Settings.Instance.DateSetting.Format, Culture.Default);
+                Date = _now.ToString(Core.Settings.Instance.DateSetting.Format, Culture.Default);
             }
         }
 

@@ -110,7 +110,7 @@ namespace SidebarDiagnostics
         {
             await BindPosition();
 
-            if (Framework.Settings.Instance.AlwaysTop)
+            if (Core.Settings.Instance.AlwaysTop)
             {
                 SetTopMost(false);
 
@@ -123,7 +123,7 @@ namespace SidebarDiagnostics
                 ShowDesktop.AddHook(this);
             }
 
-            if (Framework.Settings.Instance.ClickThrough)
+            if (Core.Settings.Instance.ClickThrough)
             {
                 SetClickThrough();
             }
@@ -132,7 +132,7 @@ namespace SidebarDiagnostics
                 ClearClickThrough();
             }
 
-            if (Framework.Settings.Instance.ToolbarMode)
+            if (Core.Settings.Instance.ToolbarMode)
             {
                 HideInAltTab();
             }
@@ -143,7 +143,7 @@ namespace SidebarDiagnostics
 
             if (WindowControls.Visibility != Visibility.Visible)
             {
-                if (Framework.Settings.Instance.CollapseMenuBar)
+                if (Core.Settings.Instance.CollapseMenuBar)
                 {
                     WindowControls.Visibility = Visibility.Collapsed;
                 }
@@ -153,7 +153,7 @@ namespace SidebarDiagnostics
                 }
             }
 
-            Hotkey.Initialize(this, Framework.Settings.Instance.Hotkeys);
+            Hotkey.Initialize(this, Core.Settings.Instance.Hotkeys);
 
             if (enableHotkeys)
             {
@@ -221,7 +221,7 @@ namespace SidebarDiagnostics
 
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
-            WindowControls.Visibility = Framework.Settings.Instance.CollapseMenuBar ? Visibility.Collapsed : Visibility.Hidden;
+            WindowControls.Visibility = Core.Settings.Instance.CollapseMenuBar ? Visibility.Collapsed : Visibility.Hidden;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)

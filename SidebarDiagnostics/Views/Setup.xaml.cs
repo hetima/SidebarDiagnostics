@@ -21,10 +21,10 @@ namespace SidebarDiagnostics
         {
             InitializeComponent();
 
-            Framework.Settings.Instance.ScreenIndex = 0;
-            Framework.Settings.Instance.DockEdge = DockEdge.Right;
-            Framework.Settings.Instance.XOffset = 0;
-            Framework.Settings.Instance.YOffset = 0;
+            Core.Settings.Instance.ScreenIndex = 0;
+            Core.Settings.Instance.DockEdge = DockEdge.Right;
+            Core.Settings.Instance.XOffset = 0;
+            Core.Settings.Instance.YOffset = 0;
 
             Sidebar = new Dummy(this);
             Sidebar.Show();
@@ -79,8 +79,8 @@ namespace SidebarDiagnostics
 
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (Action)(() =>
                 {
-                    Framework.Settings.Instance.XOffset = (int)XOffsetSlider.Value;
-                    Framework.Settings.Instance.YOffset = (int)YOffsetSlider.Value;
+                    Core.Settings.Instance.XOffset = (int)XOffsetSlider.Value;
+                    Core.Settings.Instance.YOffset = (int)YOffsetSlider.Value;
 
                     Sidebar.Reposition();
                 }));
@@ -116,8 +116,8 @@ namespace SidebarDiagnostics
                 Sidebar.Close();
             }
 
-            Framework.Settings.Instance.InitialSetup = false;
-            Framework.Settings.Instance.Save();
+            Core.Settings.Instance.InitialSetup = false;
+            Core.Settings.Instance.Save();
 
             App.StartApp(_openSettings);
         }

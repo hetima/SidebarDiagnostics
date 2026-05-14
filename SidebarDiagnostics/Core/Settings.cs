@@ -3,11 +3,9 @@ using System.IO;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using SidebarDiagnostics.Utilities;
-using SidebarDiagnostics.Monitoring;
 using SidebarDiagnostics.Windows;
 using System.Globalization;
-
-namespace SidebarDiagnostics.Framework
+namespace SidebarDiagnostics.Core
 {
     [JsonObject(MemberSerialization.OptIn)]
     public sealed class Settings : INotifyPropertyChanged
@@ -780,7 +778,7 @@ namespace SidebarDiagnostics.Framework
             {
                 if (string.Equals(Format, "Disabled", StringComparison.Ordinal))
                 {
-                    return Resources.SettingsDateFormatDisabled;
+                    return Strings.SettingsDateFormatDisabled;
                 }
 
                 return DateTime.Today.ToString(Format, Culture.Default);
