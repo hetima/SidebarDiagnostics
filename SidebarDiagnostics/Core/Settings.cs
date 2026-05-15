@@ -707,6 +707,27 @@ namespace SidebarDiagnostics.Core
             }
         }
 
+        public static FontSetting x20
+        {
+            get
+            {
+                return new FontSetting(20);
+            }
+        }
+        public static FontSetting x22
+        {
+            get
+            {
+                return new FontSetting(22);
+            }
+        }
+        public static FontSetting x24
+        {
+            get
+            {
+                return new FontSetting(24);
+            }
+        }
         [JsonProperty]
         public int FontSize { get; set; }
 

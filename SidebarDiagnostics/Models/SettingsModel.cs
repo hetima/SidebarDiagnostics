@@ -65,14 +65,17 @@ namespace SidebarDiagnostics.Models
 
             TextAlign = Core.Settings.Instance.TextAlign;
 
-            FontSettingItems = new FontSetting[5]
-            {
+            FontSettingItems =
+            [
                 FontSetting.x10,
                 FontSetting.x12,
                 FontSetting.x14,
                 FontSetting.x16,
-                FontSetting.x18
-            };
+                FontSetting.x18,
+                FontSetting.x20,
+                FontSetting.x22,
+                FontSetting.x24,
+            ];
 
             FontNameItems = Fonts.SystemFontFamilies.Select(i => i.Source).ToArray();
 
