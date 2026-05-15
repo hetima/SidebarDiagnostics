@@ -1,0 +1,83 @@
+<UserControl x:Class="SidebarDiagnostics.SettingsCustomizeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:conv="clr-namespace:SidebarDiagnostics.Converters"
+             xmlns:res="clr-namespace:SidebarDiagnostics"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <conv:BoolInverseConverter x:Key="BoolInverseConverter" />
+    </UserControl.Resources>
+    <Grid Style="{StaticResource SettingGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsSidebarWidth}" />
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <TextBox Text="{Binding ElementName=SidebarWidthSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
+            <Slider x:Name="SidebarWidthSlider" Value="{Binding Path=SidebarWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="300" TickFrequency="5" LargeChange="100" ToolTip="{x:Static res:Strings.SettingsSidebarWidthTooltip}" />
+        </DockPanel>
+
+        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static res:Strings.SettingsAutoBackground}" />
+        <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=AutoBGColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAutoBackgroundTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsBackgroundColor}" />
+        <xctk:ColorPicker Grid.Column="1" Grid.Row="2" IsEnabled="{Binding Path=AutoBGColor, Mode=OneWay, Converter={StaticResource BoolInverseConverter}}" SelectedColor="{Binding Path=BGColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsBackgroundColorTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsBackgroundOpacity}" />
+        <DockPanel Grid.Column="1" Grid.Row="3">
+            <TextBox Text="{Binding ElementName=BGOpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
+            <Slider x:Name="BGOpacitySlider" Value="{Binding Path=BGOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0.01" Maximum="1.0" LargeChange="0.1" TickFrequency="0.01" ToolTip="{x:Static res:Strings.SettingsBackgroundOpacityTooltip}" />
+        </DockPanel>
+
+        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static res:Strings.SettingsTextAlign}" />
+        <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Path=TextAlignItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=TextAlign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsTextAlignTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static res:Strings.SettingsFontName}" />
+        <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Path=FontNameItems, Mode=OneWay}" SelectedValue="{Binding Path=FontName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontNameTooltip}" />
+        
+        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsFontSize}" />
+        <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Path=FontSettingItems, Mode=OneWay}" DisplayMemberPath="FontSize" SelectedValue="{Binding Path=FontSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontSizeTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsFontColor}" />
+        <xctk:ColorPicker Grid.Column="1" Grid.Row="7" SelectedColor="{Binding Path=FontColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontColorTooltip}"/>
+
+        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsAlertFontColor}" />
+        <xctk:ColorPicker Grid.Column="1" Grid.Row="8" SelectedColor="{Binding Path=AlertFontColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlertFontColorTooltip}"/>
+
+        <Label Grid.Column="0" Grid.Row="9" Content="{x:Static res:Strings.SettingsAlertBlink}" />
+        <CheckBox Grid.Column="1" Grid.Row="9" IsChecked="{Binding Path=AlertBlink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlertBlinkTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="10" Content="{x:Static res:Strings.SettingsShowMachineName}" />
+        <CheckBox Grid.Column="1" Grid.Row="10" IsChecked="{Binding Path=ShowMachineName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowMachineNameTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="11" Content="{x:Static res:Strings.SettingsShowClock}" />
+        <CheckBox Grid.Column="1" Grid.Row="11" IsChecked="{Binding Path=ShowClock, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowClockTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="12" Content="{x:Static res:Strings.Settings24HourClock}" />
+        <CheckBox Grid.Column="1" Grid.Row="12" IsChecked="{Binding Path=Clock24HR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=ShowClock, Mode=OneWay}" ToolTip="{x:Static res:Strings.Settings24HourClockTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="13" Content="{x:Static res:Strings.SettingsDateFormat}" />
+        <ComboBox Grid.Column="1" Grid.Row="13" ItemsSource="{Binding Path=DateSettingItems}" DisplayMemberPath="Display" SelectedValue="{Binding Path=DateSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=ShowClock, Mode=OneWay}" ToolTip="{x:Static res:Strings.SettingsDateFormatTooltip}" />
+    </Grid>
+</UserControl>

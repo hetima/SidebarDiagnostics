@@ -1,0 +1,64 @@
+<UserControl x:Class="SidebarDiagnostics.SettingsAdvancedView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:res="clr-namespace:SidebarDiagnostics"
+             mc:Ignorable="d">
+    <Grid Style="{StaticResource SettingGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsUIScale}" />
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <TextBox Text="{Binding ElementName=UIScaleSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
+            <Slider x:Name="UIScaleSlider" Value="{Binding Path=UIScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0.5" Maximum="3.0" TickFrequency="0.1" LargeChange="0.5" ToolTip="{x:Static res:Strings.SettingsUIScaleTooltip}" />
+        </DockPanel>
+
+        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static res:Strings.SettingsHorizontalOffset}" />
+        <DockPanel Grid.Column="1" Grid.Row="1">
+            <TextBox Text="{Binding ElementName=XOffsetSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
+            <Slider x:Name="XOffsetSlider" Value="{Binding Path=XOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="-2000" Maximum="2000" TickFrequency="1" LargeChange="1000" ValueChanged="OffsetSlider_ValueChanged" ToolTip="{x:Static res:Strings.SettingsHorizontalOffsetTooltip}" />
+        </DockPanel>
+
+        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsVerticalOffset}" />
+        <DockPanel Grid.Column="1" Grid.Row="2">
+            <TextBox Text="{Binding ElementName=YOffsetSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
+            <Slider x:Name="YOffsetSlider" Value="{Binding Path=YOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="-2000" Maximum="2000" TickFrequency="1" LargeChange="1000" ValueChanged="OffsetSlider_ValueChanged" ToolTip="{x:Static res:Strings.SettingsVerticalOffsetTooltip}" />
+        </DockPanel>
+
+        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsPollingInterval}" />
+        <DockPanel Grid.Column="1" Grid.Row="3">
+            <TextBox Text="{Binding ElementName=PollingIntervalSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
+            <Slider x:Name="PollingIntervalSlider" Value="{Binding Path=PollingInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="5000" TickFrequency="100" LargeChange="1000" ToolTip="{x:Static res:Strings.SettingsPollingIntervalTooltip}" />
+        </DockPanel>
+
+        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static res:Strings.SettingsShowTrayIcon}" />
+        <CheckBox Grid.Column="1" Grid.Row="4" x:Name="ShowTrayIconCheckbox" Unchecked="ShowTrayIconCheckbox_Unchecked" IsChecked="{Binding Path=ShowTrayIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowTrayIconTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static res:Strings.SettingsToolbarMode}" />
+        <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding Path=ToolbarMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsToolbarModeTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsClickThrough}" />
+        <CheckBox Grid.Column="1" Grid.Row="6" x:Name="ClickThroughCheckbox" Checked="ClickThroughCheckbox_Checked" IsChecked="{Binding Path=ClickThrough, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsClickThroughTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsInitiallyHidden}" />
+        <CheckBox Grid.Column="1" Grid.Row="7" IsChecked="{Binding Path=InitiallyHidden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsInitiallyHiddenTooltip}" />
+        
+        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsCollapseMenuBar}" />
+        <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=CollapseMenuBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsCollapseMenuBarTooltip}" />
+    </Grid>
+</UserControl>
