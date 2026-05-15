@@ -78,4 +78,9 @@
       <CustomToolNamespace>SidebarDiagnostics</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SidebarDiagnostics\Styling\IconTheme\default.json">
+      <LogicalName>SidebarDiagnostics.Styling.IconTheme.default.json</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

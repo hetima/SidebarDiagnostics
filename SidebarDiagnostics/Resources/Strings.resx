@@ -960,6 +960,10 @@
     <value>Makes the alert text blink.</value>
     <comment>Settings alert blink tooltip</comment>
   </data>
+  <data name="SettingsIconTheme" xml:space="preserve">
+    <value>Icon Theme</value>
+    <comment>Settings icon theme label</comment>
+  </data>
   <data name="NetworkIP" xml:space="preserve">
     <value>IP Address</value>
     <comment>Full name for the network IP address metric</comment>

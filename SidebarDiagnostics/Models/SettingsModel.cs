@@ -8,6 +8,7 @@ using System.Windows;
 using SidebarDiagnostics.Utilities;
 using SidebarDiagnostics.Core;
 using SidebarDiagnostics.Windows;
+using SidebarDiagnostics.Styling.IconTheme;
 using System.Windows.Media;
 using System.Drawing.Text;
 
@@ -80,6 +81,8 @@ namespace SidebarDiagnostics.Models
             FontColor = Core.Settings.Instance.FontColor;
             AlertFontColor = Core.Settings.Instance.AlertFontColor;
             AlertBlink = Core.Settings.Instance.AlertBlink;
+            IconThemeItems = IconThemeData.GetAvailableThemes();
+            IconTheme = Core.Settings.Instance.IconTheme;
 
             DateSettingItems = new DateSetting[4]
             {
@@ -159,6 +162,7 @@ namespace SidebarDiagnostics.Models
             Core.Settings.Instance.FontColor = FontColor;
             Core.Settings.Instance.AlertFontColor = AlertFontColor;
             Core.Settings.Instance.AlertBlink = AlertBlink;
+            Core.Settings.Instance.IconTheme = IconTheme;
             Core.Settings.Instance.DateSetting = DateSetting;
             Core.Settings.Instance.CollapseMenuBar = CollapseMenuBar;
             Core.Settings.Instance.InitiallyHidden = InitiallyHidden;
@@ -815,6 +819,38 @@ namespace SidebarDiagnostics.Models
                 _initiallyHidden = value;
 
                 NotifyPropertyChanged("InitiallyHidden");
+            }
+        }
+
+        private string[] _iconThemeItems { get; set; }
+
+        public string[] IconThemeItems
+        {
+            get
+            {
+                return _iconThemeItems;
+            }
+            set
+            {
+                _iconThemeItems = value;
+
+                NotifyPropertyChanged("IconThemeItems");
+            }
+        }
+
+        private string _iconTheme { get; set; } = "Default";
+
+        public string IconTheme
+        {
+            get
+            {
+                return _iconTheme;
+            }
+            set
+            {
+                _iconTheme = value;
+
+                NotifyPropertyChanged("IconTheme");
             }
         }
 

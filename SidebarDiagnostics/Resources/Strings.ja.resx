@@ -413,4 +413,8 @@
     <value>表示方法</value>
     <comment>Visibility taskbar menu item</comment>
   </data>
+  <data name="SettingsIconTheme" xml:space="preserve">
+    <value>アイコンテーマ</value>
+    <comment>Settings icon theme label</comment>
+  </data>
 </root>

@@ -1375,6 +1375,15 @@ namespace SidebarDiagnostics {
         }
         
         /// <summary>
+        ///   Icon Theme に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsIconTheme {
+            get {
+                return ResourceManager.GetString("SettingsIconTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Hide at Startup に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsInitiallyHidden {

@@ -499,6 +499,23 @@ namespace SidebarDiagnostics.Core
             }
         }
 
+        private string _iconTheme { get; set; } = "Default";
+
+        [JsonProperty]
+        public string IconTheme
+        {
+            get
+            {
+                return _iconTheme;
+            }
+            set
+            {
+                _iconTheme = value;
+
+                NotifyPropertyChanged("IconTheme");
+            }
+        }
+
         private bool _showMachineName { get; set; } = false;
 
         [JsonProperty]
