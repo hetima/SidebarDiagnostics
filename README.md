@@ -44,8 +44,11 @@ The .NET 10 Desktop Runtime is required to run this application. If it is not in
 winget install Microsoft.DotNet.DesktopRuntime.10
 ```
 
-[PawnIO](https://pawnio.eu/) is required to retrieve all hardware information. Install it separately.
+[PawnIO](https://pawnio.eu/) is required to retrieve all hardware information. Install from official site or run the following command:
 
+```
+winget install namazso.PawnIO
+```
 
 ### Important
 
