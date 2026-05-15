@@ -18,7 +18,7 @@
         Closing="Window_Closing"
         Closed="Window_Closed"
         Title="{x:Static res:Strings.SettingsTitle}"
-        Icon="Settings.ico"
+        Icon="../Resources/Settings.ico"
         Width="600"
         SizeToContent="Height"
         ShowMaximize="False"

@@ -13,12 +13,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="FlatStyle.xaml" />
+                <ResourceDictionary Source="Styling/FlatStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <command:ActivateCommand x:Key="ShowCommand" />
 
-            <tb:TaskbarIcon x:Key="TrayIcon" IconSource="Sidebar.ico" LeftClickCommand="{StaticResource ShowCommand}">
+            <tb:TaskbarIcon x:Key="TrayIcon" IconSource="Resources/Sidebar.ico" LeftClickCommand="{StaticResource ShowCommand}">
                 <tb:TaskbarIcon.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="{x:Static res:Strings.ButtonSettings}" Click="Settings_Click" />
@@ -42,7 +42,7 @@
 
             <Style x:Key="SidebarWindow" TargetType="{x:Type win:AppBarWindow}">
                 <Setter Property="Title" Value="{x:Static res:Strings.Sidebar}" />
-                <Setter Property="Icon" Value="Sidebar.ico" />
+                <Setter Property="Icon" Value="Resources/Sidebar.ico" />
                 <Setter Property="Left" Value="0" />
                 <Setter Property="Top" Value="0" />
                 <Setter Property="Width" Value="0" />
