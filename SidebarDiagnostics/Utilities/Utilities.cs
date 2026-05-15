@@ -17,7 +17,7 @@ namespace SidebarDiagnostics.Utilities
         private const string SETTINGS = "settings.json";
         public static string Install(Version version)
         {
-            return Path.Combine(LocalApp, string.Format("app-{0}", version.ToString(3)));
+            return Path.Combine(LocalAppDirPath, string.Format("app-{0}", version.ToString(3)));
         }
 
         public static string Exe(Version version)
@@ -75,32 +75,48 @@ namespace SidebarDiagnostics.Utilities
 
         public static string SettingsFile
         {
-           get
+            get
             {
-               if (_settingsFile == null)
-              {
-               string currentDirPath = Path.Combine(Environment.CurrentDirectory, SETTINGS);
-               string localAppPath = Path.Combine(LocalApp, SETTINGS);
+                if (_settingsFile == null)
+                {
+                    string currentDirPath = Path.Combine(Environment.CurrentDirectory, SETTINGS);
+                    string localAppPath = Path.Combine(LocalAppDirPath, SETTINGS);
 
-               // Prefer the settings file in the current directory, if it exists
-               _settingsFile = File.Exists(currentDirPath) ? currentDirPath : localAppPath;
-           }
+                    // Prefer the settings file in the current directory, if it exists
+                    _settingsFile = File.Exists(currentDirPath) ? currentDirPath : localAppPath;
+                }
 
-          return _settingsFile;
-         }
-}
-        private static string _localApp { get; set; } = null;
+                return _settingsFile;
+            }
+        }
 
-        public static string LocalApp
+
+        private static string _localAppDirPath { get; set; } = null;
+        private static string _localIconThemesPath { get; set; } = null;
+
+        public static string LocalAppDirPath
         {
             get
             {
-                if (_localApp == null)
+                if (_localAppDirPath == null)
                 {
-                    _localApp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AssemblyName);
+                    _localAppDirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AssemblyName);
                 }
 
-                return _localApp;
+                return _localAppDirPath;
+            }
+        }
+
+        public static string LocalIconThemesPath
+        {
+            get
+            {
+                if (_localIconThemesPath == null)
+                {
+                    _localIconThemesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AssemblyName, "IconThemes");
+                }
+
+                return _localIconThemesPath;
             }
         }
     }

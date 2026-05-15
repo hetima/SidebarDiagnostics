@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
 using Newtonsoft.Json;
-using SharpVectors.Dom.Svg;
 
 
 namespace SidebarDiagnostics.Styling.IconTheme
@@ -18,10 +17,10 @@ namespace SidebarDiagnostics.Styling.IconTheme
         {
             if (_default != null)
             {
-                return default;
+                return _default;
             }
             _default = Load("Default");
-            return default;
+            return _default;
         }
         public string Name { get; set; }
 
@@ -39,21 +38,24 @@ namespace SidebarDiagnostics.Styling.IconTheme
                 return _default;
             }
             
-            string resourceName = _namespace + themeName.ToLower() + ".json";
+            string resourceName = _namespace + themeName + ".json";
             Assembly assembly = typeof(IconThemeData).Assembly;
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            Stream stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream == null)
             {
+                resourceName = _namespace + "Default.json";
+                stream = assembly.GetManifestResourceStream(resourceName);
                 if (stream == null)
                 {
                     throw new FileNotFoundException($"Icon theme resource '{resourceName}' not found.");
                 }
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return JsonConvert.DeserializeObject<IconThemeData>(reader.ReadToEnd());
-                }
             }
+
+            using StreamReader reader = new StreamReader(stream);
+            var result = JsonConvert.DeserializeObject<IconThemeData>(reader.ReadToEnd());
+            stream.Dispose();
+            return result;
         }
 
         /// <summary>
@@ -74,37 +76,30 @@ namespace SidebarDiagnostics.Styling.IconTheme
         /// <summary>
         /// Get the list of available icon theme names.
         /// </summary>
-        public static string[] GetAvailableThemes()
+        public static List<IconThemeData> GetAvailableThemes()
         {
-            return typeof(IconThemeData).Assembly
+            List<IconThemeData> result = [];
+            var themes = typeof(IconThemeData).Assembly
                 .GetManifestResourceNames()
-                .Where(name => name.StartsWith(_namespace) && name.EndsWith(".json"))
-                .Select(name =>
+                .Where(name => name.StartsWith(_namespace) && name.EndsWith(".json"));
+            
+            Assembly assembly = typeof(IconThemeData).Assembly;
+            foreach (var resourceName in themes)
+            {
+                using Stream stream = assembly.GetManifestResourceStream(resourceName);
+                if (stream == null)
                 {
-                    string fileName = name.Substring(_namespace.Length);
-                    return fileName.Substring(0, fileName.Length - ".json".Length);
-                })
-                .Select(name => char.ToUpper(name[0]) + name.Substring(1))
-                .ToArray();
-        }
+                    throw new FileNotFoundException($"Icon theme resource '{resourceName}' not found.");
+                }
 
-        /// <summary>
-        /// Get the icon path data for a given MonitorType key.
-        /// Falls back to the provided default if the key is not found.
-        /// </summary>
-        public string GetIconSvg(string monitorTypeKey, string fallback = null)
-        {
-            if (Icons != null && Icons.TryGetValue(monitorTypeKey, out string path))
-            {
-                return path;
+                using StreamReader reader = new StreamReader(stream);
+                var data = JsonConvert.DeserializeObject<IconThemeData>(reader.ReadToEnd());
+                result.Add(data);
+
+
             }
 
-            if (this != _default)
-            {
-                _loadDefault()?.GetIconSvg(monitorTypeKey);
-            }
-
-            return fallback;
+            return result;
         }
 
         public static void ReplaceColor(Drawing drawing, Brush newBrush)

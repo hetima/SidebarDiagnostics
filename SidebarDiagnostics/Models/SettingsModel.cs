@@ -8,7 +8,6 @@ using System.Windows;
 using SidebarDiagnostics.Utilities;
 using SidebarDiagnostics.Core;
 using SidebarDiagnostics.Windows;
-using SidebarDiagnostics.Styling.IconTheme;
 using System.Windows.Media;
 using System.Drawing.Text;
 
@@ -84,7 +83,7 @@ namespace SidebarDiagnostics.Models
             FontColor = Core.Settings.Instance.FontColor;
             AlertFontColor = Core.Settings.Instance.AlertFontColor;
             AlertBlink = Core.Settings.Instance.AlertBlink;
-            IconThemeItems = IconThemeData.GetAvailableThemes();
+            IconThemeItems = Core.Settings.IconThemeList;
             IconTheme = Core.Settings.Instance.IconTheme;
 
             DateSettingItems = new DateSetting[4]

@@ -1,4 +1,4 @@
-<h1><img src="https://cdn.rawgit.com/hetima/SidebarDiagnostics/master/sidebar.ico" width="64" height="64" /> Sidebar Diagnostics</h1>
+<h1>Sidebar Diagnostics</h1>
 
 A simple sidebar for Windows desktop that displays hardware diagnostic information.
 

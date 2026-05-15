@@ -127,7 +127,7 @@
                             <DataTemplate DataType="{x:Type core:MonitorPanel}">
                                 <StackPanel Style="{StaticResource GroupPanel}">
                                     <StackPanel Style="{StaticResource MonitorTitle}">
-                                        <Image x:Name="svgImage"
+                                        <Image x:Name="svgImage2"
                                                 Source="{Binding Path=SvgImageSource, Mode=OneWay}"
                                                 Style="{StaticResource AppIconImage}" />
                                         <Label Content="{Binding Path=Title, Mode=OneWay}" Style="{StaticResource AppTitle}" />

@@ -16,8 +16,7 @@ using LibreHardwareMonitor.Hardware;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using SidebarDiagnostics.Styling.IconTheme;
-using SharpVectors.Converters;
-using SharpVectors.Renderers.Wpf;
+using SVGImage.SVG;
 
 namespace SidebarDiagnostics.Core
 {
@@ -27,7 +26,7 @@ namespace SidebarDiagnostics.Core
 
         public MonitorManager(MonitorConfig[] config)
         {
-            _iconTheme = IconThemeData.Load(Settings.Instance.IconTheme) ?? IconThemeData.Load("Default");
+            _iconTheme = IconThemeData.Load(Settings.Instance.IconTheme);
 
             _computer = new Computer()
             {
@@ -44,8 +43,8 @@ namespace SidebarDiagnostics.Core
 
             UpdateBoard();
 
- 
-           foreach (var c in config)
+
+            foreach (var c in config)
             {
                 if (c.Type == MonitorType.RAM && c.Hardware != null)
                 {
@@ -144,7 +143,7 @@ namespace SidebarDiagnostics.Core
                 case MonitorType.CPU:
                     return OHMPanel(
                         config.Type,
-                        _iconTheme.GetIconSvg("CPU"),
+                        Core.Settings.Instance.GetIconSvgPath("cpu"),
                         config.Hardware,
                         config.Metrics,
                         config.Params,
@@ -154,7 +153,7 @@ namespace SidebarDiagnostics.Core
                 case MonitorType.RAM:
                     return OHMPanel(
                         config.Type,
-                        _iconTheme.GetIconSvg("RAM"),
+                        Core.Settings.Instance.GetIconSvgPath("ram"),
                         config.Hardware,
                         config.Metrics,
                         config.Params,
@@ -164,7 +163,7 @@ namespace SidebarDiagnostics.Core
                 case MonitorType.GPU:
                     return OHMPanel(
                         config.Type,
-                        _iconTheme.GetIconSvg("GPU"),
+                        Core.Settings.Instance.GetIconSvgPath("gpu"),
                         config.Hardware,
                         config.Metrics,
                         config.Params,
@@ -205,7 +204,7 @@ namespace SidebarDiagnostics.Core
         {
             return new MonitorPanel(
                 type.GetDescription(),
-                _iconTheme.GetIconSvg("HD"),
+                Core.Settings.Instance.GetIconSvgPath("hd"),
                 DriveMonitor.GetInstances(hardwareConfig, metrics, parameters)
                 );
         }
@@ -214,7 +213,7 @@ namespace SidebarDiagnostics.Core
         {
             return new MonitorPanel(
                 type.GetDescription(),
-                _iconTheme.GetIconSvg("Network"),
+                Core.Settings.Instance.GetIconSvgPath("net"),
                 NetworkMonitor.GetInstances(hardwareConfig, metrics, parameters)
                 );
         }
@@ -251,7 +250,7 @@ namespace SidebarDiagnostics.Core
     {
         public MonitorPanel(string title, string iconData, params iMonitor[] monitors)
         {
-            SvgContent = iconData;
+            SvgContentPath = iconData;
             Title = title;
 
             Monitors = monitors;
@@ -275,7 +274,7 @@ namespace SidebarDiagnostics.Core
                     }
 
                     _monitors = null;
-                    _svgContent = null;
+                    _svgContentPath = null;
                 }
 
                 _disposed = true;
@@ -290,28 +289,20 @@ namespace SidebarDiagnostics.Core
         {
             get
             {
-                if (string.IsNullOrEmpty(_svgContent)) return null;
+                if (string.IsNullOrEmpty(_svgContentPath)) return null;
 
-                var settings = new WpfDrawingSettings
-                {
-                    IncludeRuntime = true,
-                    TextAsGeometry = false,
-                };
-
-                Color clr = (Color)ColorConverter.ConvertFromString(Settings.Instance.FontColor);
-                var brush = new SolidColorBrush(clr);
-                var converter = new StreamSvgConverter(settings);
-
-                using var svgStream = new MemoryStream(Encoding.UTF8.GetBytes(_svgContent));
-                using var imageStream = new MemoryStream();
-                converter.Convert(svgStream, imageStream);
-                var drawing = converter.Drawing;
-                IconThemeData.ReplaceColor(drawing, brush);
-
+                var render = new SVGImage.SVG.SVGRender();
+                Color clr = (Color)ColorConverter.ConvertFromString(Core.Settings.Instance.FontColor);
+                render.OverrideColor = clr;
+                render.OverrideFillColor = clr;
+                DrawingGroup drawing = render.LoadDrawing(_svgContentPath);
+                if (drawing == null) return null;
+                // var brush = new SolidColorBrush(clr);
+                // Styling.IconTheme.IconThemeData.ReplaceColor(drawing, brush);
                 return new DrawingImage(drawing);
             }
         }
-        
+
         public void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -322,18 +313,17 @@ namespace SidebarDiagnostics.Core
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private String _svgContent { get; set; }
+        private String _svgContentPath { get; set; }
 
-        public String SvgContent
+        public String SvgContentPath
         {
             get
             {
-                return _svgContent;
+                return _svgContentPath;
             }
             private set
             {
-                _svgContent = value;
-
+                _svgContentPath = value;
                 NotifyPropertyChanged("SvgContent");
                 NotifyPropertyChanged("SvgImageSource");
             }

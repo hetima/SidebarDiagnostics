@@ -3,12 +3,8 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using SidebarDiagnostics.Core;
 using SidebarDiagnostics.Utilities;
-using System.IO;
-using System.Text;
+using System.Diagnostics;
 using System.Windows.Media;
-using SidebarDiagnostics.Styling.IconTheme;
-using SharpVectors.Converters;
-using SharpVectors.Renderers.Wpf;
 
 namespace SidebarDiagnostics.Models
 {
@@ -279,26 +275,17 @@ namespace SidebarDiagnostics.Models
         {
             get
             {
-                IconThemeData _iconTheme = IconThemeData.Load(Core.Settings.Instance.IconTheme) ?? IconThemeData.Load("Default");
-                String _svgContent = _iconTheme.GetIconSvg("CLOCK");
-                if (string.IsNullOrEmpty(_svgContent)) return null;
+                string svgContentPath = Core.Settings.Instance.GetIconSvgPath("clock");
+                if (string.IsNullOrEmpty(svgContentPath)) return null;
 
-                var settings = new WpfDrawingSettings
-                {
-                    IncludeRuntime = true,
-                    TextAsGeometry = false,
-                };
-
+                var render = new SVGImage.SVG.SVGRender();
                 Color clr = (Color)ColorConverter.ConvertFromString(Core.Settings.Instance.FontColor);
-                var brush = new SolidColorBrush(clr);
-                var converter = new StreamSvgConverter(settings);
-
-                using var svgStream = new MemoryStream(Encoding.UTF8.GetBytes(_svgContent));
-                using var imageStream = new MemoryStream();
-                converter.Convert(svgStream, imageStream);
-                var drawing = converter.Drawing;
-                IconThemeData.ReplaceColor(drawing, brush);
-
+                render.OverrideColor = clr;
+                render.OverrideFillColor = clr;
+                DrawingGroup drawing = render.LoadDrawing(svgContentPath);
+                if (drawing == null) return null;
+                // var brush = new SolidColorBrush(clr);
+                // Styling.IconTheme.IconThemeData.ReplaceColor(drawing, brush);
                 return new DrawingImage(drawing);
             }
         }

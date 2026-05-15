@@ -5,6 +5,10 @@ using Newtonsoft.Json;
 using SidebarDiagnostics.Utilities;
 using SidebarDiagnostics.Windows;
 using System.Globalization;
+using System.Collections.Generic;
+using SidebarDiagnostics.Styling.IconTheme;
+using System.Diagnostics;
+
 namespace SidebarDiagnostics.Core
 {
     [JsonObject(MemberSerialization.OptIn)]
@@ -12,11 +16,62 @@ namespace SidebarDiagnostics.Core
     {
         private Settings() { }
 
+        private static string[] _iconThemeList;
+
+        public static string[] IconThemeList
+        {
+            get
+            {
+                if (_iconThemeList != null)
+                {
+                    return _iconThemeList;
+                }
+
+                HashSet<string> result = [];
+                string iconThemesPath = Paths.LocalIconThemesPath;
+
+                // Ensure the directory exists
+                Directory.CreateDirectory(iconThemesPath);
+
+                // Get all local themes
+                foreach (string dir in Directory.GetDirectories(iconThemesPath))
+                {
+                    result.Add(Path.GetFileName(dir));
+                }
+
+                // Extract embedded themes
+                foreach (var theme in IconThemeData.GetAvailableThemes())
+                {
+                    if (!result.Contains(theme.Name))
+                    {
+                        string themeDir = Path.Combine(iconThemesPath, theme.Name);
+                        Directory.CreateDirectory(themeDir);
+
+                        foreach (var icon in theme.Icons)
+                        {
+                            string iconPath = Path.Combine(themeDir, icon.Key + ".svg");
+                            File.WriteAllText(iconPath, icon.Value);
+                        }
+                        result.Add(theme.Name);
+                    }
+                }
+
+                // Move "Default" to the front
+                if (result.Contains("Default"))
+                {
+                    result.Remove("Default");
+                    List<string> sorted = ["Default", .. result];
+                    return _iconThemeList = sorted.ToArray();
+                }
+                return _iconThemeList = [.. result];
+            }
+        }
+
         public void Save()
         {
-            if (!Directory.Exists(Paths.LocalApp))
+            if (!Directory.Exists(Paths.LocalAppDirPath))
             {
-                Directory.CreateDirectory(Paths.LocalApp);
+                Directory.CreateDirectory(Paths.LocalAppDirPath);
             }
 
             using (StreamWriter _writer = File.CreateText(Paths.SettingsFile))
@@ -41,6 +96,9 @@ namespace SidebarDiagnostics.Core
                     _return = (Settings)new JsonSerializer().Deserialize(_reader, typeof(Settings));
                 }
             }
+
+            // Extract embedded icon themes
+            _ = Core.Settings.IconThemeList;
 
             return _return ?? new Settings();
         }
@@ -68,7 +126,7 @@ namespace SidebarDiagnostics.Core
             {
                 _initialSetup = value;
 
-                NotifyPropertyChanged("InitialSetup");
+                NotifyPropertyChanged(nameof(InitialSetup));
             }
         }
 
@@ -85,7 +143,7 @@ namespace SidebarDiagnostics.Core
             {
                 _dockEdge = value;
 
-                NotifyPropertyChanged("DockEdge");
+                NotifyPropertyChanged(nameof(DockEdge));
             }
         }
 
@@ -102,7 +160,7 @@ namespace SidebarDiagnostics.Core
             {
                 _screenIndex = value;
 
-                NotifyPropertyChanged("ScreenIndex");
+                NotifyPropertyChanged(nameof(ScreenIndex));
             }
         }
 
@@ -119,7 +177,7 @@ namespace SidebarDiagnostics.Core
             {
                 _culture = value;
 
-                NotifyPropertyChanged("Culture");
+                NotifyPropertyChanged(nameof(Culture));
             }
         }
 
@@ -136,7 +194,7 @@ namespace SidebarDiagnostics.Core
             {
                 _useAppBar = value;
 
-                NotifyPropertyChanged("UseAppBar");
+                NotifyPropertyChanged(nameof(UseAppBar));
             }
         }
 
@@ -153,7 +211,7 @@ namespace SidebarDiagnostics.Core
             {
                 _alwaysTop = value;
 
-                NotifyPropertyChanged("AlwaysTop");
+                NotifyPropertyChanged(nameof(AlwaysTop));
             }
         }
 
@@ -171,7 +229,7 @@ namespace SidebarDiagnostics.Core
             {
                 _runAtStartup = value;
 
-                NotifyPropertyChanged("RunAtStartup");
+                NotifyPropertyChanged(nameof(RunAtStartup));
             }
         }
 
@@ -188,7 +246,7 @@ namespace SidebarDiagnostics.Core
             {
                 _uiScale = value;
 
-                NotifyPropertyChanged("UIScale");
+                NotifyPropertyChanged(nameof(UIScale));
             }
         }
 
@@ -205,7 +263,7 @@ namespace SidebarDiagnostics.Core
             {
                 _xOffset = value;
 
-                NotifyPropertyChanged("XOffset");
+                NotifyPropertyChanged(nameof(XOffset));
             }
         }
 
@@ -222,7 +280,7 @@ namespace SidebarDiagnostics.Core
             {
                 _yOffset = value;
 
-                NotifyPropertyChanged("YOffset");
+                NotifyPropertyChanged(nameof(YOffset));
             }
         }
 
@@ -239,7 +297,7 @@ namespace SidebarDiagnostics.Core
             {
                 _pollingInterval = value;
 
-                NotifyPropertyChanged("PollingInterval");
+                NotifyPropertyChanged(nameof(PollingInterval));
             }
         }
 
@@ -256,7 +314,7 @@ namespace SidebarDiagnostics.Core
             {
                 _toolbarMode = value;
 
-                NotifyPropertyChanged("ToolbarMode");
+                NotifyPropertyChanged(nameof(ToolbarMode));
             }
         }
 
@@ -273,7 +331,7 @@ namespace SidebarDiagnostics.Core
             {
                 _clickThrough = value;
 
-                NotifyPropertyChanged("ClickThrough");
+                NotifyPropertyChanged(nameof(ClickThrough));
             }
         }
 
@@ -290,7 +348,7 @@ namespace SidebarDiagnostics.Core
             {
                 _showTrayIcon = value;
 
-                NotifyPropertyChanged("ShowTrayIcon");
+                NotifyPropertyChanged(nameof(ShowTrayIcon));
             }
         }
 
@@ -307,7 +365,7 @@ namespace SidebarDiagnostics.Core
             {
                 _collapseMenuBar = value;
 
-                NotifyPropertyChanged("CollapseMenuBar");
+                NotifyPropertyChanged(nameof(CollapseMenuBar));
             }
         }
 
@@ -324,7 +382,7 @@ namespace SidebarDiagnostics.Core
             {
                 _initiallyHidden = value;
                 
-                NotifyPropertyChanged("InitiallyHidden");
+                NotifyPropertyChanged(nameof(InitiallyHidden));
             }
         }
 
@@ -341,7 +399,7 @@ namespace SidebarDiagnostics.Core
             {
                 _sidebarWidth = value;
 
-                NotifyPropertyChanged("SidebarWidth");
+                NotifyPropertyChanged(nameof(SidebarWidth));
             }
         }
 
@@ -358,7 +416,7 @@ namespace SidebarDiagnostics.Core
             {
                 _autoBGColor = value;
 
-                NotifyPropertyChanged("AutoBGColor");
+                NotifyPropertyChanged(nameof(AutoBGColor));
             }
         }
 
@@ -375,7 +433,7 @@ namespace SidebarDiagnostics.Core
             {
                 _bgColor = value;
 
-                NotifyPropertyChanged("BGColor");
+                NotifyPropertyChanged(nameof(BGColor));
             }
         }
 
@@ -392,7 +450,7 @@ namespace SidebarDiagnostics.Core
             {
                 _bgOpacity = value;
 
-                NotifyPropertyChanged("BGOpacity");
+                NotifyPropertyChanged(nameof(BGOpacity));
             }
         }
 
@@ -409,7 +467,7 @@ namespace SidebarDiagnostics.Core
             {
                 _textAlign = value;
 
-                NotifyPropertyChanged("TextAlign");
+                NotifyPropertyChanged(nameof(TextAlign));
             }
         }
 
@@ -426,7 +484,7 @@ namespace SidebarDiagnostics.Core
             {
                 _fontSetting = value;
 
-                NotifyPropertyChanged("FontSetting");
+                NotifyPropertyChanged(nameof(FontSetting));
             }
         }
 
@@ -443,7 +501,7 @@ namespace SidebarDiagnostics.Core
             {
                 _fontName = value;
 
-                NotifyPropertyChanged("FontName");
+                NotifyPropertyChanged(nameof(FontName));
             }
         }
 
@@ -461,7 +519,7 @@ namespace SidebarDiagnostics.Core
             {
                 _fontColor = value;
 
-                NotifyPropertyChanged("FontColor");
+                NotifyPropertyChanged(nameof(FontColor));
             }
         }
 
@@ -478,7 +536,7 @@ namespace SidebarDiagnostics.Core
             {
                 _alertFontColor = value;
 
-                NotifyPropertyChanged("AlertFontColor");
+                NotifyPropertyChanged(nameof(AlertFontColor));
             }
         }
 
@@ -495,7 +553,7 @@ namespace SidebarDiagnostics.Core
             {
                 _alertBlink = value;
 
-                NotifyPropertyChanged("AlertBlink");
+                NotifyPropertyChanged(nameof(AlertBlink));
             }
         }
 
@@ -512,8 +570,14 @@ namespace SidebarDiagnostics.Core
             {
                 _iconTheme = value;
 
-                NotifyPropertyChanged("IconTheme");
+                NotifyPropertyChanged(nameof(IconTheme));
             }
+        }
+
+        public string GetIconSvgPath(string iconName)
+        {
+            string path = Path.Combine(Paths.LocalIconThemesPath, IconTheme, iconName + ".svg");
+            return File.Exists(path) ? path : null;
         }
 
         private bool _showMachineName { get; set; } = false;
@@ -529,7 +593,7 @@ namespace SidebarDiagnostics.Core
             {
                 _showMachineName = value;
 
-                NotifyPropertyChanged("ShowMachineName");
+                NotifyPropertyChanged(nameof(ShowMachineName));
             }
         }
 
@@ -546,7 +610,7 @@ namespace SidebarDiagnostics.Core
             {
                 _showClock = value;
 
-                NotifyPropertyChanged("ShowClock");
+                NotifyPropertyChanged(nameof(ShowClock));
             }
         }
 
@@ -563,7 +627,7 @@ namespace SidebarDiagnostics.Core
             {
                 _clock24HR = value;
 
-                NotifyPropertyChanged("Clock24HR");
+                NotifyPropertyChanged(nameof(Clock24HR));
             }
         }
 
@@ -580,7 +644,7 @@ namespace SidebarDiagnostics.Core
             {
                 _dateSetting = value;
 
-                NotifyPropertyChanged("DateSetting");
+                NotifyPropertyChanged(nameof(DateSetting));
             }
         }
 
@@ -597,7 +661,7 @@ namespace SidebarDiagnostics.Core
             {
                 _monitorConfig = value;
 
-                NotifyPropertyChanged("MonitorConfig");
+                NotifyPropertyChanged(nameof(MonitorConfig));
             }
         }
 
@@ -614,7 +678,7 @@ namespace SidebarDiagnostics.Core
             {
                 _hotkeys = value;
 
-                NotifyPropertyChanged("Hotkeys");
+                NotifyPropertyChanged(nameof(Hotkeys));
             }
         }
 
