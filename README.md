@@ -2,6 +2,9 @@
 
 A simple sidebar for Windows desktop that displays hardware diagnostic information.
 
+> [!NOTE]
+> Development has moved to new repository. This repository is now deprecated and will not receive further updates. Please check the [Solid State Sidebar](https://github.com/hetima/SolidStateSidebar) repository for the new version.
+
 ### Download
 
 Go to the <a href="https://github.com/hetima/SidebarDiagnostics/releases">releases tab</a>.
