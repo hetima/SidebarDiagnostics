@@ -11,7 +11,7 @@
         xmlns:res="clr-namespace:SidebarDiagnostics"
         mc:Ignorable="d"
         Title="{x:Static res:Strings.AppName}"
-        Icon="Sidebar.ico"
+        Icon="../Resources/Sidebar.ico"
         Width="300"
         SizeToContent="Height"
         ShowTitleBar="False"

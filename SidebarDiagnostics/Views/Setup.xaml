@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         Closed="Window_Closed"
         Title="{x:Static res:Strings.AppName}"
-        Icon="Sidebar.ico"
+        Icon="../Resources/Sidebar.ico"
         Height="400"
         Width="400"
         ShowIcon="False"
